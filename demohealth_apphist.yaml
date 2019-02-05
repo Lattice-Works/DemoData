@@ -1,0 +1,417 @@
+entityDefinitions:
+  person:
+    fqn: "general.person"
+    entitySetName: "DemoPatients"
+    propertyDefinitions:
+      nc.SubjectIdentification:
+        type:  "nc.SubjectIdentification"
+        column: "ID"
+      ol.datasource:
+        type: "ol.datasource"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Anytown Medical Center"
+    name: "person"
+    currentSync: true
+
+  appt1:
+    fqn: "ol.appointment"
+    entitySetName: "DemoAppointments"
+    propertyDefinitions:
+      general.id:
+        type:  "general.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ID", "appt_1_date"]
+      general.datetime:
+        type: "general.datetime"
+        column: "appt_1_date"
+        transforms:
+        - !<transforms.DateTransform>
+          pattern: ["MM/dd/yy"]
+      general.status:
+        type: "general.status"
+        column: "appt_1_attended_yn"
+        transforms:
+        - !<transforms.ReplaceTransform>
+          target: ['yes', 'no']
+          goal: ['arrived', 'no show']
+    name: "appt1"
+    currentSync: true
+
+  appt2:
+    fqn: "ol.appointment"
+    entitySetName: "DemoAppointments"
+    propertyDefinitions:
+      general.id:
+        type:  "general.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ID", "appt_2_date"]
+      general.datetime:
+        type: "general.datetime"
+        column: "appt_2_date"
+        transforms:
+        - !<transforms.DateTransform>
+          pattern: ["MM/dd/yy"]
+      general.status:
+        type: "general.status"
+        column: "appt_2_attended_yn"
+        transforms:
+        - !<transforms.ReplaceTransform>
+            target: ['yes', 'no']
+            goal: ['arrived', 'no show']
+    name: "appt2"
+    currentSync: true
+
+  appt3:
+    fqn: "ol.appointment"
+    entitySetName: "DemoAppointments"
+    propertyDefinitions:
+      general.id:
+        type:  "general.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ID", "appt_3_date"]
+      general.datetime:
+        type: "general.datetime"
+        column: "appt_3_date"
+        transforms:
+        - !<transforms.DateTransform>
+          pattern: ["MM/dd/yy"]
+      general.status:
+        type: "general.status"
+        column: "appt_3_attended_yn"
+        transforms:
+        - !<transforms.ReplaceTransform>
+            target: ['yes', 'no']
+            goal: ['arrived', 'no show']
+    name: "appt3"
+    currentSync: true
+
+  appt4:
+    fqn: "ol.appointment"
+    entitySetName: "DemoAppointments"
+    propertyDefinitions:
+      general.id:
+        type:  "general.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ID", "appt_4_date"]
+      general.datetime:
+        type: "general.datetime"
+        column: "appt_4_date"
+        transforms:
+        - !<transforms.DateTransform>
+          pattern: ["MM/dd/yy"]
+      general.status:
+        type: "general.status"
+        column: "appt_4_attended_yn"
+        transforms:
+        - !<transforms.ReplaceTransform>
+            target: ['yes', 'no']
+            goal: ['arrived', 'no show']
+    name: "appt4"
+    currentSync: true
+
+  appt5:
+    fqn: "ol.appointment"
+    entitySetName: "DemoAppointments"
+    propertyDefinitions:
+      general.id:
+        type:  "general.id" 
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ID", "appt_5_date"]
+      general.datetime:
+        type: "general.datetime"
+        column: "appt_5_date"
+        transforms:
+        - !<transforms.DateTransform>
+          pattern: ["MM/dd/yy"]
+      general.status:
+        type: "general.status"
+        column: "appt_5_attended_yn"
+        transforms:
+        - !<transforms.ReplaceTransform>
+            target: ['yes', 'no']
+            goal: ['arrived', 'no show']
+    name: "appt5"
+    currentSync: true
+
+  appt6:
+    fqn: "ol.appointment"
+    entitySetName: "DemoAppointments"
+    propertyDefinitions:
+      general.id:
+        type:  "general.id" 
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ID", "appt_6_date"]
+      general.datetime:
+        type: "general.datetime"
+        column: "appt_6_date"
+        transforms:
+        - !<transforms.DateTransform>
+          pattern: ["MM/dd/yy"]
+      general.status:
+        type: "general.status"
+        column: "appt_6_attended_yn"
+        transforms:
+        - !<transforms.ReplaceTransform>
+            target: ['yes', 'no']
+            goal: ['arrived', 'no show']
+    name: "appt6"
+    currentSync: true
+
+  appt7:
+    fqn: "ol.appointment"
+    entitySetName: "DemoAppointments"
+    propertyDefinitions:
+      general.id:
+        type:  "general.id" 
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ID", "appt_7_date"]
+      general.datetime:
+        type: "general.datetime"
+        column: "appt_7_date"
+        transforms:
+        - !<transforms.DateTransform>
+          pattern: ["MM/dd/yy"]
+      general.status:
+        type: "general.status"
+        column: "appt_7_attended_yn"
+        transforms:
+        - !<transforms.ReplaceTransform>
+            target: ['yes', 'no']
+            goal: ['arrived', 'no show']
+    name: "appt7"
+    currentSync: true
+
+  appt8:
+    fqn: "ol.appointment"
+    entitySetName: "DemoAppointments"
+    propertyDefinitions:
+      general.id:
+        type:  "general.id" 
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ID", "appt_8_date"]
+      general.datetime:
+        type: "general.datetime"
+        column: "appt_8_date"
+        transforms:
+        - !<transforms.DateTransform>
+          pattern: ["MM/dd/yy"]
+      general.status:
+        type: "general.status"
+        column: "appt_8_attended_yn"
+        transforms:
+        - !<transforms.ReplaceTransform>
+            target: ['yes', 'no']
+            goal: ['arrived', 'no show']
+    name: "appt8"
+    currentSync: true
+
+  appt9:
+    fqn: "ol.appointment"
+    entitySetName: "DemoAppointments"
+    propertyDefinitions:
+      general.id:
+        type:  "general.id" 
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ID", "appt_9_date"]
+      general.datetime:
+        type: "general.datetime"
+        column: "appt_9_date"
+        transforms:
+        - !<transforms.DateTransform>
+          pattern: ["MM/dd/yy"]
+      general.status:
+        type: "general.status"
+        column: "appt_9_attended_yn"
+        transforms:
+        - !<transforms.ReplaceTransform>
+            target: ['yes', 'no']
+            goal: ['arrived', 'no show']
+    name: "appt9"
+    currentSync: true
+
+  appt10:
+    fqn: "ol.appointment"
+    entitySetName: "DemoAppointments"
+    propertyDefinitions:
+      general.id:
+        type:  "general.id" 
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ID", "appt_10_date"]
+      general.datetime:
+        type: "general.datetime"
+        column: "appt_10_date"
+        transforms:
+        - !<transforms.DateTransform>
+          pattern: ["MM/dd/yy"]
+      general.status:
+        type: "general.status"
+        column: "appt_10_attended_yn"
+        transforms:
+        - !<transforms.ReplaceTransform>
+            target: ['yes', 'no']
+            goal: ['arrived', 'no show']
+    name: "appt10"
+    currentSync: true
+
+associationDefinitions:
+
+  scheduled1:
+    fqn: "ol.scheduled"
+    entitySetName: "DemoScheduled"
+    src: "person"
+    dst: "appt1"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ID", "appt_1_date"]
+          separator: "_"
+    name: "scheduled1"
+    currentSync: true
+
+  scheduled2:
+    fqn: "ol.scheduled"
+    entitySetName: "DemoScheduled"
+    src: "person"
+    dst: "appt2"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ID", "appt_2_date"]
+          separator: "_"
+    name: "scheduled2"
+    currentSync: true
+
+  scheduled3:
+    fqn: "ol.scheduled"
+    entitySetName: "DemoScheduled"
+    src: "person"
+    dst: "appt3"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ID", "appt_3_date"]
+          separator: "_"
+    name: "scheduled3"
+    currentSync: true
+
+  scheduled4:
+    fqn: "ol.scheduled"
+    entitySetName: "DemoScheduled"
+    src: "person"
+    dst: "appt4"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ID", "appt_4_date"]
+          separator: "_"
+    name: "scheduled4"
+    currentSync: true
+
+  scheduled5:
+    fqn: "ol.scheduled"
+    entitySetName: "DemoScheduled"
+    src: "person"
+    dst: "appt5"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ID", "appt_5_date"]
+          separator: "_"
+    name: "scheduled5"
+    currentSync: true
+
+  scheduled6:
+    fqn: "ol.scheduled"
+    entitySetName: "DemoScheduled"
+    src: "person"
+    dst: "appt6"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ID", "appt_6_date"]
+          separator: "_"
+    name: "scheduled6"
+    currentSync: true
+
+  scheduled7:
+    fqn: "ol.scheduled"
+    entitySetName: "DemoScheduled"
+    src: "person"
+    dst: "appt7"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ID", "appt_7_date"]
+          separator: "_"
+    name: "scheduled7"
+    currentSync: true
+
+  scheduled8:
+    fqn: "ol.scheduled"
+    entitySetName: "DemoScheduled"
+    src: "person"
+    dst: "appt8"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ID", "appt_8_date"]
+          separator: "_"
+    name: "scheduled8"
+    currentSync: true
+
+  scheduled9:
+    fqn: "ol.scheduled"
+    entitySetName: "DemoScheduled"
+    src: "person"
+    dst: "appt9"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ID", "appt_9_date"]
+          separator: "_"
+    name: "scheduled9"
+    currentSync: true
+
+  scheduled10:
+    fqn: "ol.scheduled"
+    entitySetName: "DemoScheduled"
+    src: "person"
+    dst: "appt10"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ID", "appt_10_date"]
+          separator: "_"
+    name: "scheduled10"
+    currentSync: true
