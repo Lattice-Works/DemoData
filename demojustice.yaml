@@ -7,7 +7,6 @@ entityDefinitions:
         type:  "ol.id"
         column: "ArrestingOfficerBadgeID"
     name: "arrofficer"
-    currentSync: true
 
   trofficer:
     fqn: "ol.employee"
@@ -17,7 +16,6 @@ entityDefinitions:
         type:  "ol.id" 
         column: "TranspOfficerBadgeID"
     name: "trofficer"
-    currentSync: true
 
   relofficer:
     fqn: "ol.employee"
@@ -27,7 +25,6 @@ entityDefinitions:
         type:  "ol.id" 
         column: "ReleaseOfficerBadgeID"
     name: "relofficer"
-    currentSync: true
 
   person:
     fqn: "general.person"
@@ -62,9 +59,8 @@ entityDefinitions:
         column: "SocialSecurityNumber"
       ol.datasource:
         type: "ol.datasource"
-        column: "FacilityName"
+        column: "ArrestingAgencyName"
     name: "person"
-    currentSync: true
 
   persondetails:
     fqn: "ol.persondetails"
@@ -81,7 +77,6 @@ entityDefinitions:
       column: "EyeColorText"
       reverse: true
     name: "persondetails"
-    currentSync: true
 
   persondetailscriminaljustice:
     fqn: "ol.persondetailscriminaljustice"
@@ -98,7 +93,6 @@ entityDefinitions:
       column: "RegisteredSexOffender"
       reverse: true
     name: "persondetailscriminaljustice"
-    currentSync: true
 
   incident:
     fqn: "ol.incident"
@@ -120,7 +114,6 @@ entityDefinitions:
       #   type: "publicsafety.weaponspresent"
       #   column: "WeaponsPresent"
     name: "incident"
-    currentSync: true
 
   location:
     fqn: "ol.location"
@@ -139,7 +132,6 @@ entityDefinitions:
         type: "location.city"
         column: "IncidentCity"
     name: "location"
-    currentSync: true
 
   offense:
     fqn: "ol.offense"
@@ -155,7 +147,6 @@ entityDefinitions:
         type: "ol.notes"
         column: "OffenseLocalText"
     name: "offense"
-    currentSync: true
 
   booking:
     fqn: "ol.booking"
@@ -168,7 +159,6 @@ entityDefinitions:
           type: "person.ageatevent"
           column: "AgeAtBooking"
     name: "booking"
-    currentSync: true
 
   sentence:
     fqn: "ol.sentence"
@@ -187,7 +177,6 @@ entityDefinitions:
         type: "ol.sentencedays"
         column: "SentenceTermDays"
     name: "sentence"
-    currentSync: true
 
   arrest:
     fqn: "ol.arrest"
@@ -209,7 +198,6 @@ entityDefinitions:
         type: "criminaljustice.warranttype"
         column: "WarrantType"
     name: "arrest"
-    currentSync: true
 
   charge:
     fqn: "ol.charge"
@@ -225,7 +213,6 @@ entityDefinitions:
         type: "ol.levelstate"
         column: "ChargeLevelState"
     name: "charge"
-    currentSync: true
 
   arrestingagency:
     fqn: "ol.agency"
@@ -238,10 +225,9 @@ entityDefinitions:
         type: "ol.name"
         column: "ArrestingAgencyName"
     name: "arrestingagency"
-    currentSync: true
 
 
-#
+
 
 ############ ASSOCIATIONS
 associationDefinitions:
@@ -258,7 +244,6 @@ associationDefinitions:
           columns: ["SubjectIdentification", "ArrestNumber"]
           separator: "_"
     name: "subjectof1"
-    currentSync: true
 
   #person → subject of → booking
   subjectof2:
@@ -274,7 +259,6 @@ associationDefinitions:
           columns: ["SubjectIdentification", "BookingID"]
           separator: "_"
     name: "subjectof2"
-    currentSync: true
 
   arrestedby1:
     fqn: "ol.arrestedby"
@@ -289,7 +273,6 @@ associationDefinitions:
           columns: ['SubjectIdentification','ArrestingOfficerBadgeID']
           separator: "_"
     name: "arrestedby1"
-    currentSync: true
 
   arrestedby2:
     fqn: "ol.arrestedby"
@@ -304,7 +287,6 @@ associationDefinitions:
           columns: ['SubjectIdentification','ArrestingAgencyName']
           separator: "_"
     name: "arrestedby2"
-    currentSync: true
 
   transportedby:
     fqn: "ol.transportedby"
@@ -318,8 +300,7 @@ associationDefinitions:
         - !<transforms.ConcatTransform>
           columns: ['SubjectIdentification','TranspOfficerBadgeID']
           separator: "_"
-    name: "transportedby"
-    currentSync: true  
+    name: "transportedby"  
 
   releasedby:
     fqn: "ol.releasedby"
@@ -334,7 +315,6 @@ associationDefinitions:
           columns: ['SubjectIdentification', 'ReleaseOfficerBadgeID']
           separator: "_"
     name: "releasedby"
-    currentSync: true
 
   resultsin1:
     fqn: "ol.resultsin"
@@ -349,7 +329,6 @@ associationDefinitions:
           columns: ["ChargeID", "SentenceID"]
           separator: "_"
     name: "resultsin1"
-    currentSync: true
 
   resultsin2:
     fqn: "ol.resultsin"
@@ -363,7 +342,6 @@ associationDefinitions:
         - !<transforms.ConcatTransform>
           columns: ["ChargeID"]
     name: "resultsin2"
-    currentSync: true
 
   #booking → results in → sentence
 
@@ -379,7 +357,6 @@ associationDefinitions:
         - !<transforms.ConcatTransform>
           columns: ["BookingID", "SentenceID"]
     name: "resultsin3"
-    currentSync: true
 
   locatedat:
     fqn: "ol.locatedat"
@@ -394,7 +371,6 @@ associationDefinitions:
           columns: ['SubjectIdentification', 'IncidentStreet','IncidentCity']
           separator: "_"
     name: "locatedat"
-    currentSync: true
 
   chargedwith:
     fqn: "ol.chargedwith"
@@ -406,7 +382,6 @@ associationDefinitions:
         type: "ol.id"
         column: "counter"
     name: "chargedwith"
-    currentSync: true
 
   has1:
     fqn: "ol.has"
@@ -418,7 +393,6 @@ associationDefinitions:
         type: "ol.id"
         column: "SubjectIdentification"
     name: "has1"
-    currentSync: true
 
   has2:
     fqn: "ol.has"
@@ -430,7 +404,6 @@ associationDefinitions:
         type: "ol.id"
         column: "SubjectIdentification"
     name: "has2"
-    currentSync: true
 
   involvedin1:
     fqn: "ol.involvedin"
@@ -445,7 +418,6 @@ associationDefinitions:
           columns: ['SubjectIdentification', 'IncidentID']
           separator: "_"
     name: "involvedin1"
-    currentSync: true
 
   involvedin2:
     fqn: "ol.involvedin"
@@ -465,7 +437,6 @@ associationDefinitions:
         - !<transforms.ValueTransform>
           value: "Officer"
     name: "involvedin2"
-    currentSync: true
 
   involvedin3:
     fqn: "ol.involvedin"
@@ -485,7 +456,6 @@ associationDefinitions:
         - !<transforms.ValueTransform>
           value: "Officer"
     name: "involvedin3"
-    currentSync: true
 
   involvedin4:
     fqn: "ol.involvedin"
@@ -505,7 +475,6 @@ associationDefinitions:
         - !<transforms.ValueTransform>
           value: "Officer"
     name: "involvedin4"
-    currentSync: true
 
   suspectedof:
     fqn: "ol.suspectedof"
@@ -520,7 +489,6 @@ associationDefinitions:
           columns: ["SubjectIdentification", "ChargeID"]
           separator: "_"
     name: "suspectedof"
-    currentSync: true
 
   relatedto1:
     fqn: "ol.relatedto"
@@ -535,7 +503,6 @@ associationDefinitions:
           columns: ["ArrestNumber", "IncidentID"]
           separator: "_"
     name: "relatedto1"
-    currentSync: true
 
   relatedto2:
     fqn: "ol.relatedto"
@@ -550,7 +517,6 @@ associationDefinitions:
           columns: ["ChargeID", "IncidentID"]
           separator: "_"
     name: "relatedto2"
-    currentSync: true
 
   relatedto3:
     fqn: "ol.relatedto"
@@ -565,5 +531,4 @@ associationDefinitions:
           columns: ["ChargeID", "IncidentID"]
           separator: "_"
     name: "relatedto3"
-    currentSync: true
 

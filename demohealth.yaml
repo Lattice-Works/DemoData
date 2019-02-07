@@ -56,8 +56,8 @@ entityDefinitions:
       person.veteranstatus:
         type: "person.veteranstatus"
         column: "MilitaryStatus"
-      #must include a primary key property in propertyDefinitions
     name: "persondetails"
+
 
   persondetailshealth:
     fqn: "ol.persondetailshealth"
@@ -218,7 +218,6 @@ entityDefinitions:
         - !<transforms.ReplaceTransform>
           target: ['DR']
           goal: ['MD']
-      #must include a primary key property in propertyDefinitions
     name: "provider"
 
 
@@ -233,7 +232,6 @@ entityDefinitions:
       ol.description:
         type: "ol.description"
         column: "Diagnosis"
-      #must include a primary key property in propertyDefinitions
     name: "diagnosis"
 
 
@@ -263,7 +261,6 @@ entityDefinitions:
         - !<transforms.ReplaceTransform>
           target: ['MEDICAID', 'MEDICARE', 'NONE', 'PRIVATE INSURANCE', 'BLUE CROSS/BLUE SHIELD', 'INVALID']
           goal: ['Medicaid', 'Medicare', '', 'Private', 'Blue Cross/Blue Shield', '']
-      #must include a primary key property in propertyDefinitions
     name: "insurance1"
 
   insurance2:
@@ -292,7 +289,6 @@ entityDefinitions:
         - !<transforms.ReplaceTransform>
           target: ['MEDICAID', 'MEDICARE', 'NONE', 'PRIVATE INSURANCE', 'BLUE CROSS/BLUE SHIELD', 'INVALID']
           goal: ['Medicaid', 'Medicare', '', 'Private', 'Blue Cross/Blue Shield', '']
-      #must include a primary key property in propertyDefinitions
     name: "insurance2"
 
 
@@ -446,8 +442,12 @@ associationDefinitions:
       ol.id:
         type: "ol.id"
         transforms:
-        - !<transforms.ConcatTransform>
-          columns: ["ID", "TimeIn"]
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["ID", "TimeIn"]
+          - !<transforms.ValueTransform>
+            value: "1"
     name: "has1"
 
   has2:
@@ -459,8 +459,12 @@ associationDefinitions:
       ol.id:
         type: "ol.id"
         transforms:
-        - !<transforms.ConcatTransform>
-          columns: ["ID", "TimeIn"]
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["ID", "TimeIn"]
+          - !<transforms.ValueTransform>
+            value: "2"
     name: "has2"
 
   has3:
@@ -472,9 +476,30 @@ associationDefinitions:
       ol.id:
         type: "ol.id"
         transforms:
-        - !<transforms.ConcatTransform>
-          columns: ["ID", "TimeIn"]
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["ID", "TimeIn"]
+          - !<transforms.ValueTransform>
+            value: "3"
     name: "has3"
+
+  has4:
+    fqn: "ol.has"
+    entitySetName: "DemoHas"
+    src: "episode"
+    dst: "episodedetails"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["ID", "TimeIn"]
+          - !<transforms.ValueTransform>
+            value: "4"
+    name: "has4"
 
   livesat:
     fqn: "ol.livesat"
@@ -516,7 +541,7 @@ associationDefinitions:
           pattern: ["MM/dd/yy HH:mm:ss", "M/dd/yy", "MM/dd/yy H:mm:ss"]
     name: "reported"
 
-  presentsfor:
+  presentsfor1:
     fqn: "ol.presentsfor"
     entitySetName: "DemoPresentsFor"
     src: "person"
@@ -525,18 +550,21 @@ associationDefinitions:
       ol.id:
         type: "ol.id"
         transforms:
-        - !<transforms.ConcatTransform>
-          columns: ["ID", "TimeIn"]
-          separator: "_"
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["ID", "TimeIn"]
+          - !<transforms.ValueTransform>
+            value: "1"
       ol.datetimeadministered:
         type: "ol.datetimeadministered"
         column: "TimeIn"
         transforms:
         - !<transforms.DateTimeTransform>
           pattern: ["MM/dd/yy HH:mm:ss", "M/dd/yy", "MM/dd/yy H:mm:ss"]
-    name: "presentsfor"
+    name: "presentsfor1"
 
-  presentsfor1:
+  presentsfor2:
     fqn: "ol.presentsfor"
     entitySetName: "DemoPresentsFor"
     src: "person"
@@ -545,16 +573,19 @@ associationDefinitions:
       ol.id:
         type: "ol.id"
         transforms:
-        - !<transforms.ConcatTransform>
-          columns: ["ID", "TimeIn"]
-          separator: "_"
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["ID", "TimeIn"]
+          - !<transforms.ValueTransform>
+            value: "2"
       ol.datetimeadministered:
         type: "ol.datetimeadministered"
         column: "TimeIn"
         transforms:
         - !<transforms.DateTimeTransform>
           pattern: ["MM/dd/yy HH:mm:ss", "M/dd/yy", "MM/dd/yy H:mm:ss"]
-    name: "presentsfor1"
+    name: "presentsfor2"
 
   # encounter -> resultsin -> diagnosis
 
