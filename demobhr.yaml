@@ -1,0 +1,645 @@
+entityDefinitions:
+  historicalbhr:
+    fqn: "bhr.report"
+    # entitySetName: "OpenLattice Demo Org -_app_bhr"
+    entitySetName: "OpenLattice_app_bhr"
+    propertyDefinitions:
+      nc.SubjectIdentification:
+        type: "nc.SubjectIdentification"
+        column: "nc.SubjectIdentification"
+      bhr.dispatchReason:
+        type: "bhr.dispatchReason"
+        column: "bhr.dispatchReason"
+      bhr.complaintNumber:
+        type: "bhr.complaintNumber"
+        column: "bhr.complaintNumber"
+      bhr.companionOffenseReport:
+        type: "bhr.companionOffenseReport"
+        column: "bhr.companionOffenseReport"
+        transforms:
+        - !<transforms.ParseBoolTransform> {}
+      bhr.incident:
+        type: "bhr.incident"
+        column: "bhr.incident"
+      bhr.locationOfIncident:
+        type:  "bhr.locationOfIncident"
+        column: "bhr.locationOfIncident"
+      bhr.unit:
+        type: "bhr.unit"
+        column: "bhr.unit"
+      bhr.postOfOccurrence:
+        type: "bhr.postOfOccurrence"
+        column: "bhr.postOfOccurrence"
+      bhr.cadNumber:
+        type: "bhr.cadNumber"
+        column: "bhr.cadNumber"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+      bhr.onView:
+        type: "bhr.onView"
+        column: "bhr.onView"
+        transforms:
+        - !<transforms.ParseBoolTransform> {}
+      bhr.datetimeOccurred:
+        type: "bhr.datetimeOccurred"
+        column: "bhr.datetimeOccurred_adv"
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ["MM/dd/yyyy H:mm:ss","M/dd/yyyy H:mm:ss", "M/d/yyyy H:mm:ss", "MM/d/yyyy H:mm:ss", "yyyy-MM-dd HH:mm:ss.SSS", "yyyy-MM-dd HH:mm:ss.SS", "yyyy-MM-dd HH:mm:ss"]
+          timezone: "America/Los_Angeles"
+      bhr.datetimeReported:
+        type: "bhr.datetimeReported"
+        column: "bhr.datetimeReported_adv"
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ["MM/dd/yyyy H:mm:ss","M/dd/yyyy H:mm:ss", "M/d/yyyy H:mm:ss", "MM/d/yyyy H:mm:ss"]
+          timezone: "America/Los_Angeles"
+      bhr.address:
+        type: "bhr.address"
+        column: "bhr.address"
+      bhr.phone:
+        type: "bhr.phone"
+        column: "bhr.Phone"
+      bhr.militaryStatus:
+        type: "bhr.militaryStatus"
+        column: "bhr.militaryStatus"
+      bhr.gender:
+        type: "bhr.gender"
+        column: "bhr.gender"
+      bhr.age:
+        type: "bhr.age"
+        column: "bhr.age"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+      bhr.homeless:
+        type: "bhr.homeless"
+        column: bhr.homeless
+        transforms:
+        - !<transforms.ParseBoolTransform> {}
+      bhr.homelessLocation:
+        type: "bhr.homelessLocation"
+        column: "bhr.homelessLocation"
+      bhr.drugsAlcohol:
+        type: "bhr.drugsAlcohol"
+        column: "bhr.drugsAlcohol"
+      bhr.drugType:
+        type: "bhr.drugType"
+        column: "bhr.drugType"
+      bhr.prescribedMedication:
+        type: "bhr.prescribedMedication"
+        column: "bhr.prescribedMedication"
+      bhr.takingMedication:
+        type: "bhr.takingMedication"
+        column: "bhr.takingMedication"
+      bhr.prevPsychAdmission:
+        type: "bhr.prevPsychAdmission"
+        column: "bhr.prevPsychAdmission"
+      bhr.selfDiagnosis1:
+        type: "bhr.selfDiagnosis"
+        column: "bhr.selfDiagnosis"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 0
+      bhr.selfDiagnosis2:
+        type: "bhr.selfDiagnosis"
+        column: "bhr.selfDiagnosis"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 1
+      bhr.selfDiagnosis3:
+        type: "bhr.selfDiagnosis"
+        column: "bhr.selfDiagnosis"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 2
+      bhr.selfDiagnosis4:
+        type: "bhr.selfDiagnosis"
+        column: "bhr.selfDiagnosis"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 3
+      bhr.selfDiagnosis5:
+        type: "bhr.selfDiagnosis"
+        column: "bhr.selfDiagnosis"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 4
+      bhr.selfDiagnosis6:
+        type: "bhr.selfDiagnosis"
+        column: "bhr.selfDiagnosis"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 5
+      bhr.selfDiagnosisOther:
+        type: "bhr.selfDiagnosisOther"
+        column: "bhr.selfDiagnosisOther"
+      bhr.armedWithWeapon:
+        type: "bhr.armedWithWeapon"
+        column: "bhr.armedWithWeapon"
+        transforms:
+        - !<transforms.ParseBoolTransform> {}
+      bhr.armedWeaponType1:
+        type: "bhr.armedWeaponType"
+        column: "bhr.armedWeaponType"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 0
+      bhr.armedWeaponType2:
+        type: "bhr.armedWeaponType"
+        column: "bhr.armedWeaponType"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 1
+      bhr.armedWeaponType3:
+        type: "bhr.armedWeaponType"
+        column: "bhr.armedWeaponType"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 2
+      bhr.armedWeaponType4:
+        type: "bhr.armedWeaponType"
+        column: "bhr.armedWeaponType"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 3
+      bhr.armedWeaponType5:
+        type: "bhr.armedWeaponType"
+        column: "bhr.armedWeaponType"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 3
+      bhr.accessToWeapons:
+        type: "bhr.accessToWeapons"
+        column: "bhr.accessToWeapons"
+        transforms:
+        - !<transforms.ParseBoolTransform> {}
+      bhr.accessibleWeaponType1:
+        type: "bhr.accessibleWeaponType"
+        column: "bhr.accessibleWeaponType"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 0
+      bhr.accessibleWeaponType2:
+        type: "bhr.accessibleWeaponType"
+        column: "bhr.accessibleWeaponType"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 1
+      bhr.accessibleWeaponType3:
+        type: "bhr.accessibleWeaponType"
+        column: "bhr.accessibleWeaponType"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 2
+      bhr.accessibleWeaponType4:
+        type: "bhr.accessibleWeaponType"
+        column: "bhr.accessibleWeaponType"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 3
+      bhr.observedBehaviors1:
+        type: "bhr.observedBehaviors"
+        column: "bhr.observedBehaviors"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 0
+      bhr.observedBehaviors2:
+        type: "bhr.observedBehaviors"
+        column: "bhr.observedBehaviors"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 1
+      bhr.observedBehaviors3:
+        type: "bhr.observedBehaviors"
+        column: "bhr.observedBehaviors"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 2
+      bhr.observedBehaviors4:
+        type: "bhr.observedBehaviors"
+        column: "bhr.observedBehaviors"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 3
+      bhr.observedBehaviors5:
+        type: "bhr.observedBehaviors"
+        column: "bhr.observedBehaviors"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 4
+      bhr.observedBehaviors6:
+        type: "bhr.observedBehaviors"
+        column: "bhr.observedBehaviors"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 5
+      bhr.observedBehaviors7:
+        type: "bhr.observedBehaviors"
+        column: "bhr.observedBehaviors"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 6
+      bhr.observedBehaviors8:
+        type: "bhr.observedBehaviors"
+        column: "bhr.observedBehaviors"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 7
+      bhr.observedBehaviors9:
+        type: "bhr.observedBehaviors"
+        column: "bhr.observedBehaviors"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 8
+      bhr.observedBehaviorsOther:
+        type: "bhr.observedBehaviorsOther"
+        column: "bhr.observedBehaviorsOther"
+      bhr.emotionalState1:
+        type: "bhr.emotionalState"
+        column: "bhr.emotionalState"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 0
+      bhr.emotionalState2:
+        type: "bhr.emotionalState"
+        column: "bhr.emotionalState"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 1
+      bhr.emotionalState3:
+        type: "bhr.emotionalState"
+        column: "bhr.emotionalState"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 2
+      bhr.emotionalState4:
+        type: "bhr.emotionalState"
+        column: "bhr.emotionalState"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 3
+      bhr.emotionalState5:
+        type: "bhr.emotionalState"
+        column: "bhr.emotionalState"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 4
+      bhr.emotionalState6:
+        type: "bhr.emotionalState"
+        column: "bhr.emotionalState"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 5
+      bhr.emotionalState7:
+        type: "bhr.emotionalState"
+        column: "bhr.emotionalState"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 6
+      bhr.emotionalState8:
+        type: "bhr.emotionalState"
+        column: "bhr.emotionalState"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 7
+      bhr.emotionalStateOther:
+        type: "bhr.emotionalStateOther"
+        column: "bhr.emotionalStateOther"
+      bhr.photosTakenOf:
+        type: "bhr.photosTakenOf"
+        column: "bhr.photosTakenOf"
+      bhr.injuries1:
+        type: "bhr.injuries"
+        column: "bhr.injuries"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 0
+      bhr.injuries2:
+        type: "bhr.injuries"
+        column: "bhr.injuries"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 1
+      bhr.injuries3:
+        type: "bhr.injuries"
+        column: "bhr.injuries"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 2
+      bhr.injuriesOther:
+        type: "bhr.injuriesOther"
+        column: "bhr.injuriesOther"
+      bhr.suicidal:
+        type: "bhr.suicidal"
+        column: "bhr.suicidal"
+        transforms:
+        - !<transforms.ParseBoolTransform> {}
+      bhr.suicidalActions1:
+        type: "bhr.suicidalActions"
+        column: "bhr.suicidalActions"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 0
+      bhr.suicidalActions2:
+        type: "bhr.suicidalActions"
+        column: "bhr.suicidalActions"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 1
+      bhr.suicidalActions3:
+        type: "bhr.suicidalActions"
+        column: "bhr.suicidalActions"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 2
+      bhr.suicidalActions4:
+        type: "bhr.suicidalActions"
+        column: "bhr.suicidalActions"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 3
+      bhr.suicideAttemptMethod1:
+        type: "bhr.suicideAttemptMethod"
+        column: "bhr.suicideAttemptMethod"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 0
+      bhr.suicideAttemptMethod2:
+        type: "bhr.suicideAttemptMethod"
+        column: "bhr.suicideAttemptMethod"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 1
+      bhr.suicideAttemptMethod3:
+        type: "bhr.suicideAttemptMethod"
+        column: "bhr.suicideAttemptMethod"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 2
+      bhr.suicideAttemptMethodOther:
+        type: "bhr.suicideAttemptMethodOther"
+        column: "bhr.suicideAttemptMethodOther"
+      bhr.complainantName:
+        type: "bhr.complainantName"
+        column: "bhr.complainantName"
+      bhr.complainantAddress:
+        type: "bhr.complainantAddress"
+        column: "bhr.complainantAddress"
+      bhr.complainantConsumerRelationship:
+        type: "bhr.complainantConsumerRelationship"
+        column: "bhr.complainantConsumerRelationship"
+      bhr.complainantPhone:
+        type: "bhr.complainantPhone"
+        column: "bhr.complainantPhone"
+      bhr.disposition1:
+        type: "bhr.disposition"
+        column: "bhr.disposition"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 0
+      bhr.disposition2:
+        type: "bhr.disposition"
+        column: "bhr.disposition"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 1
+      bhr.disposition3:
+        type: "bhr.disposition"
+        column: "bhr.disposition"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 2
+      bhr.disposition4:
+        type: "bhr.disposition"
+        column: "bhr.disposition"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 3
+      bhr.disposition5:
+        type: "bhr.disposition"
+        column: "bhr.disposition"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 4
+      bhr.disposition6:
+        type: "bhr.disposition"
+        column: "bhr.disposition"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 5
+      bhr.provider:
+        type: "bhr.disposition"
+        column: "bhr.provider"
+      bhr.hospitalTransport:
+        type: "bhr.hospitalTransport"
+        column: "bhr.hospitalTransport"
+        transforms:
+        - !<transforms.ParseBoolTransform> {}
+      bhr.hospital:
+        type: "bhr.hospital"
+        column: "bhr.hospital"
+      bhr.deescalationTechniques1:
+        type: "bhr.deescalationTechniques"
+        column: "bhr.deescalationTechniques"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 0
+      bhr.deescalationTechniques2:
+        type: "bhr.deescalationTechniques"
+        column: "bhr.deescalationTechniques"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 1
+      bhr.deescalationTechniques3:
+        type: "bhr.deescalationTechniques"
+        column: "bhr.deescalationTechniques"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 2
+      bhr.deescalationTechniques4:
+        type: "bhr.deescalationTechniques"
+        column: "bhr.deescalationTechniques"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 3
+      bhr.deescalationTechniquesOther:
+        type: "bhr.deescalationTechniquesOther"
+        column: "bhr.deescalationTechniquesOther"
+      bhr.specializedResourcesCalled1:
+        type: "bhr.specializedResourcesCalled"
+        column: "bhr.specializedResourcesCalled"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 0
+      bhr.specializedResourcesCalled2:
+        type: "bhr.specializedResourcesCalled"
+        column: "bhr.specializedResourcesCalled"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 1
+      bhr.specializedResourcesCalled3:
+        type: "bhr.specializedResourcesCalled"
+        column: "bhr.specializedResourcesCalled"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 2
+      bhr.specializedResourcesCalled4:
+        type: "bhr.specializedResourcesCalled"
+        column: "bhr.specializedResourcesCalled"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 3
+      bhr.incidentNarrative:
+        type: "bhr.incidentNarrative"
+        column: "bhr.incidentNarrative"
+      bhr.officerName:
+        type: "bhr.officerName"
+        column: "bhr.officerName"
+      bhr.officerSeqID:
+        type: "bhr.officerSeqID"
+        column: "bhr.officerSeqID"
+      bhr.officerInjuries:
+        type: "bhr.officerInjuries"
+        column: "bhr.officerInjuries"
+      bhr.officerCertification1:
+        type: "bhr.officerCertification"
+        column: "bhr.officerCertification"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 0
+      bhr.officerCertification2:
+        type: "bhr.officerCertification"
+        column: "bhr.officerCertification"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 1
+      bhr.officerCertification3:
+        type: "bhr.officerCertification"
+        column: "bhr.officerCertification"
+        transforms:
+        - !<transforms.SplitTransform>
+          separator: ";"
+          index: 2
+      bhr.supervisor:
+        type: "bhr.supervisor"
+        column: "bhr.supervisor"
+      bhr.supervisorID:
+        type: "bhr.supervisorID"
+        column: "bhr.supervisorID"
+      bhr.race:
+        type: "bhr.race"
+        column: "bhr.race"
+    name: "historicalbhr"
+
+  people:
+    fqn: "general.person"
+    # entitySetName: "OpenLattice Demo Org -_app_people"
+    entitySetName: "OpenLattice_app_people"
+    propertyDefinitions:
+      nc.SubjectIdentification:
+        type:  "nc.SubjectIdentification"
+        column: "nc.SubjectIdentification"
+      # nc.PersonRace:
+      #   type: "nc.PersonRace"
+      #   column: "nc.PersonRace"
+      # nc.PersonSuffix:
+      #   type: "nc.PersonSuffix"
+      #   column: "nc.PersonSuffix"
+      # nc.PersonBirthDate:
+      #   type: "nc.PersonBirthDate"
+      #   column: "nc.PersonBirthDate"
+      #   transforms:
+      #   - !<transforms.DateTransform>
+      #     pattern: ["yyyy-MM-dd"]
+      # nc.PersonSurName:
+      #   type: "nc.PersonSurName"
+      #   column: "nc.PersonSurName"
+      # nc.PersonMiddleName:
+      #   type: "nc.PersonMiddleName"
+      #   column: "nc.PersonMiddleName"
+      # nc.PersonGivenName:
+      #   type: "nc.PersonGivenName"
+      #   column: "nc.PersonGivenName"
+      # nc.PersonSex:
+      #   type: "nc.PersonSex"
+      #   column: "nc.PersonSex"
+    name: "people"
+
+
+associationDefinitions:
+  appearsin:
+    fqn: "general.appearsin"
+    # entitySetName: "OpenLattice Demo Org -_app_appearsin"
+    entitySetName: "OpenLattice_app_appearsin"
+    src: "people"
+    dst: "historicalbhr"
+    propertyDefinitions:
+      general.stringid:
+        type: "general.stringid"
+        column: "general.stringid"
+      general.datetime:
+        type: "general.datetime"
+        column: "general.datetime_adv"
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ["MM/dd/yyyy H:mm:ss","M/dd/yyyy H:mm:ss", "M/d/yyyy H:mm:ss", "MM/d/yyyy H:mm:ss"]
+          timezone: "America/Los_Angeles"
+    name: "appearsin"
