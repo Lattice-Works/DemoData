@@ -1,4 +1,5 @@
 entityDefinitions:
+
   arrofficer:
     fqn: "ol.employee"
     entitySetName: "DemoOfficers"
@@ -435,7 +436,7 @@ associationDefinitions:
         type: "ol.role"
         transforms:
         - !<transforms.ValueTransform>
-          value: "Officer"
+          value: "Arresting Officer"
     name: "involvedin2"
 
   involvedin3:
@@ -454,7 +455,7 @@ associationDefinitions:
         type: "ol.role"
         transforms:
         - !<transforms.ValueTransform>
-          value: "Officer"
+          value: "Transporting Officer"
     name: "involvedin3"
 
   involvedin4:
@@ -473,7 +474,7 @@ associationDefinitions:
         type: "ol.role"
         transforms:
         - !<transforms.ValueTransform>
-          value: "Officer"
+          value: "Releasing Officer"
     name: "involvedin4"
 
   suspectedof:

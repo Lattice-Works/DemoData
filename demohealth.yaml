@@ -1,5 +1,7 @@
 
 entityDefinitions:
+
+
   person:
     fqn: "general.person"
     entitySetName: "DemoPatients"
@@ -33,7 +35,6 @@ entityDefinitions:
         column: "FacilityName"
     name: "person"
 
-
   persondetails:
     fqn: "ol.persondetails"
     entitySetName: "DemoPersonDetails"
@@ -57,7 +58,6 @@ entityDefinitions:
         type: "person.veteranstatus"
         column: "MilitaryStatus"
     name: "persondetails"
-
 
   persondetailshealth:
     fqn: "ol.persondetailshealth"
@@ -433,6 +433,7 @@ entityDefinitions:
 
   
 associationDefinitions:
+
   has1:
     fqn: "ol.has"
     entitySetName: "DemoHas"
@@ -803,9 +804,9 @@ associationDefinitions:
 
   partof:
     fqn: "ol.partof"
-    entitySetName: "DemoIncludes"
-    src: "episode"
-    dst: "encounter"
+    entitySetName: "DemoPartOf"
+    src: "encounter"
+    dst: "episode"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
