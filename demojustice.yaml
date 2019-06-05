@@ -1,5 +1,5 @@
 entityDefinitions:
-
+  
   arrofficer:
     fqn: "ol.employee"
     entitySetName: "DemoOfficers"
@@ -60,7 +60,7 @@ entityDefinitions:
         column: "SocialSecurityNumber"
       ol.datasource:
         type: "ol.datasource"
-        column: "ArrestingAgencyName"
+        column: "FacilityName"
     name: "person"
 
   persondetails:
@@ -133,6 +133,12 @@ entityDefinitions:
         type: "location.city"
         column: "IncidentCity"
     name: "location"
+
+  inci_location:
+    fqn: "ol.location"
+    entitySetName: "DemoLocations"
+    propertyDefinitions: {}
+  name: "inci_location"
 
   offense:
     fqn: "ol.offense"
@@ -226,7 +232,6 @@ entityDefinitions:
         type: "ol.name"
         column: "ArrestingAgencyName"
     name: "arrestingagency"
-
 
 
 
@@ -359,7 +364,7 @@ associationDefinitions:
           columns: ["BookingID", "SentenceID"]
     name: "resultsin3"
 
-  locatedat:
+  locatedat1:
     fqn: "ol.locatedat"
     entitySetName: "DemoLocatedAt"
     src: "person"
@@ -371,7 +376,7 @@ associationDefinitions:
         - !<transforms.ConcatTransform>
           columns: ['SubjectIdentification', 'IncidentStreet','IncidentCity']
           separator: "_"
-    name: "locatedat"
+    name: "locatedat1"
 
   chargedwith:
     fqn: "ol.chargedwith"
@@ -381,7 +386,9 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        column: "counter"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["SubjectIdentification", "ChargeID"]
     name: "chargedwith"
 
   has1:
@@ -436,7 +443,7 @@ associationDefinitions:
         type: "ol.role"
         transforms:
         - !<transforms.ValueTransform>
-          value: "Arresting Officer"
+          value: "Officer"
     name: "involvedin2"
 
   involvedin3:
@@ -455,7 +462,7 @@ associationDefinitions:
         type: "ol.role"
         transforms:
         - !<transforms.ValueTransform>
-          value: "Transporting Officer"
+          value: "Officer"
     name: "involvedin3"
 
   involvedin4:
@@ -474,7 +481,7 @@ associationDefinitions:
         type: "ol.role"
         transforms:
         - !<transforms.ValueTransform>
-          value: "Releasing Officer"
+          value: "Officer"
     name: "involvedin4"
 
   suspectedof:
