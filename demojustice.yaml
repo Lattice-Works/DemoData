@@ -1,38 +1,11 @@
 entityDefinitions:
   
-  arrofficer:
-    fqn: "ol.employee"
-    entitySetName: "DemoOfficers"
-    propertyDefinitions:
-      ol.id:
-        type:  "ol.id"
-        column: "ArrestingOfficerBadgeID"
-    name: "arrofficer"
-
-  trofficer:
-    fqn: "ol.employee"
-    entitySetName: "DemoOfficers"
-    propertyDefinitions:
-      ol.id:
-        type:  "ol.id" 
-        column: "TranspOfficerBadgeID"
-    name: "trofficer"
-
-  relofficer:
-    fqn: "ol.employee"
-    entitySetName: "DemoOfficers"
-    propertyDefinitions:
-      ol.id:
-        type:  "ol.id" 
-        column: "ReleaseOfficerBadgeID"
-    name: "relofficer"
-
   person:
     fqn: "general.person"
     entitySetName: "DemoArrestees"
     propertyDefinitions:
       nc.SubjectIdentification:
-        type:  "nc.SubjectIdentification" 
+        type: "nc.SubjectIdentification"
         column: "SubjectIdentification"
       nc.PersonGivenName:
         type: "nc.PersonGivenName"
@@ -54,7 +27,7 @@ entityDefinitions:
         column: "BirthDate"
         transforms:
         - !<transforms.DateTransform>
-          pattern: ["MM/dd/yy","M/dd/yy","MM/d/yy","M/d/yy"]
+          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy"]
       nc.SSN:
         type: "nc.SSN"
         column: "SocialSecurityNumber"
@@ -62,38 +35,6 @@ entityDefinitions:
         type: "ol.datasource"
         column: "FacilityName"
     name: "person"
-
-  persondetails:
-    fqn: "ol.persondetails"
-    entitySetName: "DemoPersonDetails"
-    propertyDefinitions:
-      ol.eyecolor:
-        type: "ol.eyecolor"
-        column: "EyeColorText"
-      general.id:
-        type:  "general.id" 
-        column: "SubjectIdentification"
-    conditions:
-    - !<conditions.BooleanIsNullCondition>
-      column: "EyeColorText"
-      reverse: true
-    name: "persondetails"
-
-  persondetailscriminaljustice:
-    fqn: "ol.persondetailscriminaljustice"
-    entitySetName: "DemoPersonDetailsCJ"
-    propertyDefinitions:
-      ol.id:
-        type:  "ol.id"
-        column: "SubjectIdentification"
-      ol.sexoffender:
-        type: "ol.sexoffender"
-        column: "RegisteredSexOffender"
-    conditions:
-    - !<conditions.BooleanIsNullCondition>
-      column: "RegisteredSexOffender"
-      reverse: true
-    name: "persondetailscriminaljustice"
 
   incident:
     fqn: "ol.incident"
@@ -107,43 +48,25 @@ entityDefinitions:
         column: "IncidentDate"
         transforms:
         - !<transforms.DateAsDateTimeTransform>
-          pattern: ["MM/dd/yy","M/dd/yy","MM/d/yy","M/d/yy"]
+          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy"]
       publicsafety.drugspresent:
         type: "publicsafety.drugspresent"
         column: "DrugsPresent"
-      # publicsafety.weaponspresent:
-      #   type: "publicsafety.weaponspresent"
-      #   column: "WeaponsPresent"
     name: "incident"
 
-  location:
-    fqn: "ol.location"
-    entitySetName: "DemoLocations"
+  chargeevent:
+    fqn: "ol.chargeevent"
+    entitySetName: "DemoChargeEvents"
     propertyDefinitions:
-      general.id:
-        type: "general.id"
-        transforms:
-        - !<transforms.ConcatTransform>
-          columns: ["IncidentStreet", "IncidentCity"]
-          separator: "_"
-      location.street:
-        type: "location.street"
-        column: "IncidentStreet"
-      location.city:
-        type: "location.city"
-        column: "IncidentCity"
-    name: "location"
-
-  inci_location:
-    fqn: "ol.location"
-    entitySetName: "DemoLocations"
-    propertyDefinitions: {}
-  name: "inci_location"
+      ol.id:
+        type: "ol.id"
+        column: "ChargeID"
+    name: "chargeevent"
 
   offense:
     fqn: "ol.offense"
     entitySetName: "DemoOffenses"
-    propertyDefinitions: 
+    propertyDefinitions:
       ol.id:
         type: "ol.id"
         column: "ChargeID"
@@ -154,18 +77,6 @@ entityDefinitions:
         type: "ol.notes"
         column: "OffenseLocalText"
     name: "offense"
-
-  booking:
-    fqn: "ol.booking"
-    entitySetName: "DemoBookings"
-    propertyDefinitions:
-      ol.id:
-        type: "ol.id"
-        column: "BookingID"
-      person.ageatevent:
-          type: "person.ageatevent"
-          column: "AgeAtBooking"
-    name: "booking"
 
   sentence:
     fqn: "ol.sentence"
@@ -185,6 +96,62 @@ entityDefinitions:
         column: "SentenceTermDays"
     name: "sentence"
 
+  charge:
+    fqn: "ol.charge"
+    entitySetName: "DemoCharges"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ChargeLevel", "ChargeLevelState"]
+      ol.level:
+        type: "ol.level"
+        column: "ChargeLevel"
+      ol.levelstate:
+        type: "ol.levelstate"
+        column: "ChargeLevelState"
+    name: "charge"
+
+  arrofficer:
+    fqn: "ol.employee"
+    entitySetName: "DemoOfficers"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "ArrestingOfficerBadgeID"
+    name: "arrofficer"
+
+  trofficer:
+    fqn: "ol.employee"
+    entitySetName: "DemoOfficers"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "TranspOfficerBadgeID"
+    name: "trofficer"
+
+  relofficer:
+    fqn: "ol.employee"
+    entitySetName: "DemoOfficers"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "ReleaseOfficerBadgeID"
+    name: "relofficer"
+
+  booking:
+    fqn: "ol.booking"
+    entitySetName: "DemoBookings"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "BookingID"
+      person.ageatevent:
+        type: "person.ageatevent"
+        column: "AgeAtBooking"
+    name: "booking"
+
   arrest:
     fqn: "ol.arrest"
     entitySetName: "DemoArrests"
@@ -197,7 +164,7 @@ entityDefinitions:
         column: "ArrestDate"
         transforms:
         - !<transforms.DateAsDateTimeTransform>
-          pattern: ["MM/dd/yy","M/dd/yy","MM/d/yy","M/d/yy"]
+          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy"]
       ol.category:
         type: "ol.category"
         column: "ArrestCategory"
@@ -206,20 +173,55 @@ entityDefinitions:
         column: "WarrantType"
     name: "arrest"
 
-  charge:
-    fqn: "ol.charge"
-    entitySetName: "DemoCharges"
+  persondetails:
+    fqn: "ol.persondetails"
+    entitySetName: "DemoPersonDetails"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "SubjectIdentification"
+      ol.eyecolor:
+        type: "ol.eyecolor"
+        column: "EyeColorText"
+    conditions:
+    - !<conditions.BooleanIsNullCondition>
+      column: "EyeColorText"
+      reverse: True
+    name: "persondetails"
+
+  persondetailscriminaljustice:
+    fqn: "ol.persondetailscriminaljustice"
+    entitySetName: "DemoPersonDetailsCJ"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        column: "ChargeID"
-      ol.level:
-        type: "ol.level"
-        column: "ChargeLevel"
-      ol.levelstate:
-        type: "ol.levelstate"
-        column: "ChargeLevelState"
-    name: "charge"
+        column: "SubjectIdentification"
+      ol.sexoffender:
+        type: "ol.sexoffender"
+        column: "RegisteredSexOffender"
+    conditions:
+    - !<conditions.BooleanIsNullCondition>
+      column: "RegisteredSexOffender"
+      reverse: True
+    name: "persondetailscriminaljustice"
+
+  location:
+    fqn: "ol.location"
+    entitySetName: "DemoLocations"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["IncidentStreet", "IncidentCity"]
+          separator: "_"
+      location.street:
+        type: "location.street"
+        column: "IncidentStreet"
+      location.city:
+        type: "location.city"
+        column: "IncidentCity"
+    name: "location"
 
   arrestingagency:
     fqn: "ol.agency"
@@ -233,138 +235,21 @@ entityDefinitions:
         column: "ArrestingAgencyName"
     name: "arrestingagency"
 
+  plea:
+    fqn: "ol.plea"
+    entitySetName: "DemoPleas"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "Plea"
+      justice.plea:
+        type: "justice.plea"
+        column: "Plea"
+    name: "plea"
 
-
-############ ASSOCIATIONS
 associationDefinitions:
-  subjectof1:
-    fqn: "ol.subjectof"
-    entitySetName: "DemoSubjectOf"
-    src: "person"
-    dst: "arrest"
-    propertyDefinitions:
-      ol.id:
-        type: "ol.id"
-        transforms:
-        - !<transforms.ConcatTransform>
-          columns: ["SubjectIdentification", "ArrestNumber"]
-          separator: "_"
-    name: "subjectof1"
 
-  #person → subject of → booking
-  subjectof2:
-    fqn: "ol.subjectof"
-    entitySetName: "DemoSubjectOf"
-    src: "person"
-    dst: "booking"
-    propertyDefinitions:
-      ol.id:
-        type: "ol.id"
-        transforms:
-        - !<transforms.ConcatTransform>
-          columns: ["SubjectIdentification", "BookingID"]
-          separator: "_"
-    name: "subjectof2"
-
-  arrestedby1:
-    fqn: "ol.arrestedby"
-    entitySetName: "DemoArrestedBy"
-    src: "person"
-    dst: "arrofficer"
-    propertyDefinitions:
-      ol.id:
-        type: "ol.id"
-        transforms:
-        - !<transforms.ConcatTransform>
-          columns: ['SubjectIdentification','ArrestingOfficerBadgeID']
-          separator: "_"
-    name: "arrestedby1"
-
-  arrestedby2:
-    fqn: "ol.arrestedby"
-    entitySetName: "DemoArrestedBy"
-    src: "person"
-    dst: "arrestingagency"
-    propertyDefinitions:
-      ol.id:
-        type: "ol.id"
-        transforms:
-        - !<transforms.ConcatTransform>
-          columns: ['SubjectIdentification','ArrestingAgencyName']
-          separator: "_"
-    name: "arrestedby2"
-
-  transportedby:
-    fqn: "ol.transportedby"
-    entitySetName: "DemoTransportedBy"
-    src: "person"
-    dst: "trofficer"
-    propertyDefinitions:
-      ol.id:
-        type: "ol.id"
-        transforms:
-        - !<transforms.ConcatTransform>
-          columns: ['SubjectIdentification','TranspOfficerBadgeID']
-          separator: "_"
-    name: "transportedby"  
-
-  releasedby:
-    fqn: "ol.releasedby"
-    entitySetName: "DemoReleasedBy"
-    src: "person"
-    dst: "relofficer"
-    propertyDefinitions:
-      ol.id:
-        type: "ol.id"
-        transforms:
-        - !<transforms.ConcatTransform>
-          columns: ['SubjectIdentification', 'ReleaseOfficerBadgeID']
-          separator: "_"
-    name: "releasedby"
-
-  resultsin1:
-    fqn: "ol.resultsin"
-    entitySetName: "DemoResultsIn"
-    src: "charge"
-    dst: "sentence"
-    propertyDefinitions:
-      ol.id:
-        type: "ol.id"
-        transforms: 
-        - !<transforms.ConcatTransform>
-          columns: ["ChargeID", "SentenceID"]
-          separator: "_"
-    name: "resultsin1"
-
-  resultsin2:
-    fqn: "ol.resultsin"
-    entitySetName: "DemoResultsIn"
-    src: "offense"
-    dst: "charge"
-    propertyDefinitions:
-      ol.id:
-        type: "ol.id"
-        transforms: 
-        - !<transforms.ConcatTransform>
-          columns: ["ChargeID"]
-    name: "resultsin2"
-
-  #booking → results in → sentence
-
-  resultsin3:
-    fqn: "ol.resultsin"
-    entitySetName: "DemoResultsIn"
-    src: "booking"
-    dst: "sentence"
-    propertyDefinitions:
-      ol.id:
-        type: "ol.id"
-        transforms: 
-        - !<transforms.ConcatTransform>
-          columns: ["BookingID", "SentenceID"]
-    name: "resultsin3"
-
-  locatedat1:
+  locatedat:
     fqn: "ol.locatedat"
     entitySetName: "DemoLocatedAt"
     src: "person"
@@ -374,22 +259,9 @@ associationDefinitions:
         type: "general.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ['SubjectIdentification', 'IncidentStreet','IncidentCity']
+          columns: ["SubjectIdentification", "IncidentStreet", "IncidentCity"]
           separator: "_"
-    name: "locatedat1"
-
-  chargedwith:
-    fqn: "ol.chargedwith"
-    entitySetName: "DemoChargedWith"
-    src: "person"
-    dst: "charge"
-    propertyDefinitions:
-      ol.id:
-        type: "ol.id"
-        transforms:
-        - !<transforms.ConcatTransform>
-          columns: ["SubjectIdentification", "ChargeID"]
-    name: "chargedwith"
+    name: "locatedat"
 
   has1:
     fqn: "ol.has"
@@ -413,6 +285,85 @@ associationDefinitions:
         column: "SubjectIdentification"
     name: "has2"
 
+  resultsin1:
+    fqn: "ol.resultsin"
+    entitySetName: "DemoResultsIn"
+    src: "chargeevent"
+    dst: "sentence"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ChargeID", "SentenceID"]
+          separator: "_"
+    name: "resultsin1"
+
+  resultsin2:
+    fqn: "ol.resultsin"
+    entitySetName: "DemoResultsIn"
+    src: "offense"
+    dst: "charge"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ChargeID"]
+    name: "resultsin2"
+
+  resultsin3:
+    fqn: "ol.resultsin"
+    entitySetName: "DemoResultsIn"
+    src: "booking"
+    dst: "sentence"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["BookingID", "SentenceID"]
+    name: "resultsin3"
+
+  addresses:
+    fqn: "ol.addresses"
+    entitySetName: "DemoAddresses"
+    src: "plea"
+    dst: "chargeevent"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ChargeID", "Plea"]
+    name: "addresses"
+
+  registeredfor:
+    fqn: "ol.sentencedwith"
+    entitySetName: "DemoRegisteredFor"
+    src: "chargeevent"
+    dst: "charge"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ChargeID", "ChargeLevelState", "ChargeLevel"]
+    name: "registeredfor"
+
+  sentencedwith:
+    fqn: "ol.sentencedwith"
+    entitySetName: "DemoSentencedWith"
+    src: "person"
+    dst: "sentence"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["SentenceID", "SubjectIdentification"]
+    name: "sentencedwith"
+
   involvedin1:
     fqn: "ol.involvedin"
     entitySetName: "DemoInvolvedIn"
@@ -423,7 +374,7 @@ associationDefinitions:
         type: "ol.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ['SubjectIdentification', 'IncidentID']
+          columns: ["SubjectIdentification", "IncidentID"]
           separator: "_"
     name: "involvedin1"
 
@@ -437,7 +388,7 @@ associationDefinitions:
         type: "ol.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ['IncidentID', 'ArrestingOfficerBadgeID']
+          columns: ["IncidentID", "ArrestingOfficerBadgeID"]
           separator: "_"
       ol.role:
         type: "ol.role"
@@ -456,7 +407,7 @@ associationDefinitions:
         type: "ol.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ['IncidentID', 'TranspOfficerBadgeID']
+          columns: ["IncidentID", "TranspOfficerBadgeID"]
           separator: "_"
       ol.role:
         type: "ol.role"
@@ -475,7 +426,7 @@ associationDefinitions:
         type: "ol.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ['IncidentID', 'ReleaseOfficerBadgeID']
+          columns: ["IncidentID", "ReleaseOfficerBadgeID"]
           separator: "_"
       ol.role:
         type: "ol.role"
@@ -484,19 +435,18 @@ associationDefinitions:
           value: "Officer"
     name: "involvedin4"
 
-  suspectedof:
-    fqn: "ol.suspectedof"
-    entitySetName: "DemoSuspectedOf"
+  chargedwith:
+    fqn: "ol.chargedwith"
+    entitySetName: "DemoChargedWith"
     src: "person"
-    dst: "offense"
+    dst: "chargeevent"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
         transforms:
         - !<transforms.ConcatTransform>
           columns: ["SubjectIdentification", "ChargeID"]
-          separator: "_"
-    name: "suspectedof"
+    name: "chargedwith"
 
   relatedto1:
     fqn: "ol.relatedto"
@@ -515,7 +465,7 @@ associationDefinitions:
   relatedto2:
     fqn: "ol.relatedto"
     entitySetName: "DemoRelatedTo"
-    src: "charge"
+    src: "chargeevent"
     dst: "incident"
     propertyDefinitions:
       ol.id:
@@ -540,3 +490,100 @@ associationDefinitions:
           separator: "_"
     name: "relatedto3"
 
+  releasedby:
+    fqn: "ol.releasedby"
+    entitySetName: "DemoReleasedBy"
+    src: "person"
+    dst: "relofficer"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["SubjectIdentification", "ReleaseOfficerBadgeID"]
+          separator: "_"
+    name: "releasedby"
+
+  suspectedof:
+    fqn: "ol.suspectedof"
+    entitySetName: "DemoSuspectedOf"
+    src: "person"
+    dst: "offense"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["SubjectIdentification", "ChargeID"]
+          separator: "_"
+    name: "suspectedof"
+
+  transportedby:
+    fqn: "ol.transportedby"
+    entitySetName: "DemoTransportedBy"
+    src: "person"
+    dst: "trofficer"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["SubjectIdentification", "TranspOfficerBadgeID"]
+          separator: "_"
+    name: "transportedby"
+
+  subjectof1:
+    fqn: "ol.subjectof"
+    entitySetName: "DemoSubjectOf"
+    src: "person"
+    dst: "arrest"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["SubjectIdentification", "ArrestNumber"]
+          separator: "_"
+    name: "subjectof1"
+
+  subjectof2:
+    fqn: "ol.subjectof"
+    entitySetName: "DemoSubjectOf"
+    src: "person"
+    dst: "booking"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["SubjectIdentification", "BookingID"]
+          separator: "_"
+    name: "subjectof2"
+
+  arrestedby1:
+    fqn: "ol.arrestedby"
+    entitySetName: "DemoArrestedBy"
+    src: "person"
+    dst: "arrofficer"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["SubjectIdentification", "ArrestingOfficerBadgeID"]
+          separator: "_"
+    name: "arrestedby1"
+
+  arrestedby2:
+    fqn: "ol.arrestedby"
+    entitySetName: "DemoArrestedBy"
+    src: "person"
+    dst: "arrestingagency"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["SubjectIdentification", "ArrestingAgencyName"]
+          separator: "_"
+    name: "arrestedby2"
