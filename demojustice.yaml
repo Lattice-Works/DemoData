@@ -1,5 +1,6 @@
+
+
 entityDefinitions:
-  
   person:
     fqn: "general.person"
     entitySetName: "DemoArrestees"
@@ -221,7 +222,64 @@ entityDefinitions:
       location.city:
         type: "location.city"
         column: "IncidentCity"
+      location.latitude:
+        type: "location.latitude"
+        column: "IncidentCoords"
+        transforms:
+        - !<transforms.SplitTransform>
+          index: 0
+          separator: ","
+          valueElse: ""
+        - !<transforms.ParseDoubleTransform> {}
+      location.longitude:
+        type: "location.longitude"
+        column: "IncidentCoords"
+        transforms:
+        - !<transforms.SplitTransform>
+          index: 1
+          separator: ","
+          valueElse: ""
+        - !<transforms.ParseDoubleTransform> {}
+      ol.locationcoordinates:
+        type: "ol.locationcoordinates"
+        column: "IncidentCoords"
     name: "location"
+
+  home_location:
+    fqn: "ol.location"
+    entitySetName: "DemoLocations"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["HomeAddress"]
+          separator: "_"
+      location.street:
+        type: "location.street"
+        column: "HomeAddress"
+      location.latitude:
+        type: "location.latitude"
+        column: "HomeCoords"
+        transforms:
+        - !<transforms.SplitTransform>
+          index: 0
+          separator: ","
+          valueElse: ""
+        - !<transforms.ParseDoubleTransform> {}
+      location.longitude:
+        type: "location.longitude"
+        column: "HomeCoords"
+        transforms:
+        - !<transforms.SplitTransform>
+          index: 1
+          separator: ","
+          valueElse: ""
+        - !<transforms.ParseDoubleTransform> {}
+      ol.locationcoordinates:
+        type: "ol.locationcoordinates"
+        column: "HomeCoords"
+    name: "home_location"
 
   arrestingagency:
     fqn: "ol.agency"
@@ -248,20 +306,31 @@ entityDefinitions:
     name: "plea"
 
 associationDefinitions:
-
-  locatedat:
+  locatedat1:
     fqn: "ol.locatedat"
     entitySetName: "DemoLocatedAt"
-    src: "person"
+    src: "incident"
     dst: "location"
     propertyDefinitions:
       general.id:
         type: "general.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ["SubjectIdentification", "IncidentStreet", "IncidentCity"]
-          separator: "_"
-    name: "locatedat"
+          columns: ["IncidentID", "IncidentCity", "IncidentStreet"]
+    name: "locatedat1"
+
+  locatedat2:
+    fqn: "ol.locatedat"
+    entitySetName: "DemoLocatedAt"
+    src: "person"
+    dst: "home_location"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["HomeAddress", "SubjectIdentification"]
+    name: "locatedat2"
 
   has1:
     fqn: "ol.has"
