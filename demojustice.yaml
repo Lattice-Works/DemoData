@@ -8,7 +8,7 @@ entityDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
         column: "SubjectIdentification"
-      nc.PersonGivenN ame:
+      nc.PersonGivenName:
         type: "nc.PersonGivenName"
         column: "FirstName"
       nc.PersonSurName:
@@ -244,9 +244,9 @@ entityDefinitions:
           separator: ","
           valueElse: ""
         - !<transforms.ParseDoubleTransform> {}
-      ol.locationcoordinates:
-        type: "ol.locationcoordinates"
-        column: "IncidentCoords"
+      # ol.locationcoordinates:
+      #   type: "ol.locationcoordinates"
+      #   column: "IncidentCoords"
     name: "location"
 
   home_location:
@@ -292,9 +292,9 @@ entityDefinitions:
       ol.id:
         type: "ol.id"
         column: "ArrestingAgencyName"
-      # ol.name:
-      #   type: "ol.name"
-      #   column: "ArrestingAgencyName"
+      ol.name:
+        type: "ol.name"
+        column: "ArrestingAgencyName"
     name: "arrestingagency"
 
   plea:
