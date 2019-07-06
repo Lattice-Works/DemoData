@@ -1,0 +1,151 @@
+
+entityDefinitions:
+
+  dispatch:
+    fqn: "ol.dispatch"
+    entitySetName: "DemoDispatch"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "incident_id"
+      ol.receiveddatetime:
+        type: "ol.receiveddatetime"
+        column: "call_datetime"
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ['yyyy-MM-dd HH:mm:ss.S', 'yyyy-MM-dd HH:mm:ss.SSSSSS']
+          timezone: "America/Los_Angeles"
+      date.completeddatetime:
+        type: "date.completeddatetime"
+        column: "time_closed"
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ['yyyy-MM-dd HH:mm:ss.SSSSSS']
+          timezone: "America/Los_Angeles"
+      ol.description:
+        type: "ol.description"
+        column: "nature"
+    name: "dispatch"
+
+  incident:
+    fqn: "ol.incident"
+    entitySetName: "DemoIncidents"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "incident_id"
+      ol.datetime_reported:
+        type: "ol.datetime_reported"
+        column: "call_datetime"
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ['yyyy-MM-dd HH:mm:ss.SSSSSS']
+          timezone: "America/Los_Angeles"
+    name: "incident"
+
+  dispatch_agency:
+    fqn: "ol.agency"
+    entitySetName: "DemoAgencies"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "service"
+      ol.type:
+        type: "ol.type"
+        column: "service"
+    name: "dispatch_agency"
+
+  location:
+    fqn: "ol.location"
+    entitySetName: "DemoLocations"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        transforms:
+        - !<transforms.HashTransform>
+          columns: ["address", "city", "coords"]
+          hashFunction: "sha256"
+      location.street:
+        type: "location.street"
+        column: "address"
+      location.city:
+        type: "location.city"
+        column: "city"
+      location.longitude:
+        type: "location.longitude"
+        column: "coords"
+        transforms:
+        - !<transforms.SplitTransform>
+          index: 1
+          separator: ","
+          valueElse: ""
+        - !<transforms.ParseDoubleTransform> {}
+      location.latitude:
+        type: "location.latitude"
+        column: "coords"
+        transforms:
+        - !<transforms.SplitTransform>
+          index: 0
+          separator: ","
+          valueElse: ""
+        - !<transforms.ParseDoubleTransform> {}
+      ol.locationcoordinates:
+        type: "ol.locationcoordinates"
+        column: "coords"
+    name: "location"
+
+
+associationDefinitions:
+
+  resultsin:
+    fqn: "ol.resultsin"
+    entitySetName: "DemoResultsIn"
+    src: "dispatch"
+    dst: "incident"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "incident_id"
+    name: "resultsin"
+
+  involvedin:
+    fqn: "ol.involvedin"
+    entitySetName: "DemoInvolvedIn"
+    src: "dispatch_agency"
+    dst: "incident"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "incident_id"
+    name: "involvedin"
+
+  locatedat1:
+    fqn: "ol.locatedat"
+    entitySetName: "DemoLocatedAt"
+    src: "dispatch"
+    dst: "location"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "incident_id"
+    name: "locatedat1"
+
+  locatedat2:
+    fqn: "ol.locatedat"
+    entitySetName: "DemoLocatedAt"
+    src: "incident"
+    dst: "location"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ColumnTransform>
+            column: "incident_id"
+          - !<transforms.ValueTransform>
+            value: "2"
+    name: "locatedat2"
+
+
+
