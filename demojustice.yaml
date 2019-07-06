@@ -2,7 +2,6 @@
 
 
 entityDefinitions:
-  
   person:
     fqn: "general.person"
     entitySetName: "DemoArrestees"
@@ -94,9 +93,13 @@ entityDefinitions:
       ol.sentenceyears:
         type: "ol.sentenceyears"
         column: "SentenceDurationYrs"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
       ol.sentencedays:
         type: "ol.sentencedays"
         column: "SentenceTermDays"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
     name: "sentence"
 
   charge:
@@ -296,9 +299,9 @@ entityDefinitions:
           separator: ","
           valueElse: ""
         - !<transforms.ParseDoubleTransform> {}
-      ol.locationcoordinates:
-        type: "ol.locationcoordinates"
-        column: "HomeCoords"
+      # ol.locationcoordinates:
+      #   type: "ol.locationcoordinates"
+      #   column: "HomeCoords"
     name: "home_location"
 
   arrestingagency:
