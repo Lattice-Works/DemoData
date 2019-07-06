@@ -1,3 +1,5 @@
+
+
 entityDefinitions:
   person:
     fqn: "general.person"

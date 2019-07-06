@@ -13,7 +13,7 @@ entityDefinitions:
         column: "call_datetime"
         transforms:
         - !<transforms.DateTimeTransform>
-          pattern: ['yyyy-MM-dd HH:mm:ss.SSSSSS']
+          pattern: ['yyyy-MM-dd HH:mm:ss.S', 'yyyy-MM-dd HH:mm:ss.SSSSSS']
           timezone: "America/Los_Angeles"
       date.completeddatetime:
         type: "date.completeddatetime"
@@ -94,6 +94,7 @@ entityDefinitions:
         column: "coords"
     name: "location"
 
+
 associationDefinitions:
 
   resultsin:
@@ -110,7 +111,7 @@ associationDefinitions:
   involvedin:
     fqn: "ol.involvedin"
     entitySetName: "DemoInvolvedIn"
-    src: dispatch_agency
+    src: "dispatch_agency"
     dst: "incident"
     propertyDefinitions:
       ol.id:
@@ -128,7 +129,6 @@ associationDefinitions:
         type: "general.id"
         column: "incident_id"
     name: "locatedat1"
-
 
   locatedat2:
     fqn: "ol.locatedat"

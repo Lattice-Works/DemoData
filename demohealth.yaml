@@ -1,7 +1,6 @@
 
 entityDefinitions:
 
-
   person:
     fqn: "general.person"
     entitySetName: "DemoPatients"
@@ -76,6 +75,7 @@ entityDefinitions:
         - !<transforms.ReplaceTransform>
           target: ['No', 'Yes', '0.0', '1.0']
           goal: ['N', 'Y', 'N', 'Y']
+        - !<transforms.ParseBoolTransform> {}
     conditions:
     - !<conditions.BooleanIsNullCondition>
       column: "Pregnant"
@@ -308,6 +308,8 @@ entityDefinitions:
       ol.temperature:
         type: "ol.temperature"
         column: "Temperature"
+        transforms:
+        - !<transforms.ParseDoubleTransform> {}
       ol.datetimeadministered:
         type: "ol.datetimeadministered"
         column: "TimeIn"
@@ -467,23 +469,6 @@ associationDefinitions:
           - !<transforms.ValueTransform>
             value: "2"
     name: "has2"
-
-  has3:
-    fqn: "ol.has"
-    entitySetName: "DemoHas"
-    src: "person"
-    dst: "vitalsigns"
-    propertyDefinitions:
-      ol.id:
-        type: "ol.id"
-        transforms:
-        - !<transforms.ConcatCombineTransform>
-          transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["ID", "TimeIn"]
-          - !<transforms.ValueTransform>
-            value: "3"
-    name: "has3"
 
   has4:
     fqn: "ol.has"
@@ -781,6 +766,29 @@ associationDefinitions:
         - !<transforms.DateTimeTransform>
           pattern: ["MM/dd/yy HH:mm:ss", "M/dd/yy", "MM/dd/yy H:mm:ss"]
     name: "observedin5"
+
+  observedin6:
+    fqn: "ol.observedin"
+    entitySetName: "DemoObservedIn"
+    src: "vitalsigns"
+    dst: "person"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["ID", "TimeIn"]
+          - !<transforms.ValueTransform>
+            value: "6"
+      date.completeddatetime:
+        type: "date.completeddatetime"
+        column: "EntryDateTime"
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ["MM/dd/yy HH:mm:ss", "M/dd/yy", "MM/dd/yy H:mm:ss"]
+    name: "observedin6"
 
   using:
     fqn: "ol.using"

@@ -1,5 +1,6 @@
 
 
+
 entityDefinitions:
   person:
     fqn: "general.person"
@@ -117,6 +118,7 @@ entityDefinitions:
         type: "ol.levelstate"
         column: "ChargeLevelState"
     name: "charge"
+
 
   arrofficer:
     fqn: "ol.employee"
@@ -244,9 +246,26 @@ entityDefinitions:
           separator: ","
           valueElse: ""
         - !<transforms.ParseDoubleTransform> {}
-      # ol.locationcoordinates:
-      #   type: "ol.locationcoordinates"
-      #   column: "IncidentCoords"
+      ol.locationcoordinates:
+        type: "ol.locationcoordinates"
+        transforms:
+        - !<transforms.GeographyPointTransform>
+          latTransforms:
+          - !<transforms.ColumnTransform>
+            column: "IncidentCoords"
+          - !<transforms.SplitTransform>
+            separator: ","
+            index: 0
+            valueElse: ""
+          - !<transforms.ParseDoubleTransform> {}
+          lonTransforms:
+          - !<transforms.ColumnTransform>
+            column: "IncidentCoords"
+          - !<transforms.SplitTransform>
+            separator: ","
+            index: 1
+            valueElse: ""
+          - !<transforms.ParseDoubleTransform> {}
     name: "location"
 
   home_location:
@@ -287,7 +306,7 @@ entityDefinitions:
 
   arrestingagency:
     fqn: "ol.agency"
-    entitySetName: "DemoArrestingAgency"
+    entitySetName: "DemoAgencies"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -310,6 +329,7 @@ entityDefinitions:
     name: "plea"
 
 associationDefinitions:
+
   locatedat1:
     fqn: "ol.locatedat"
     entitySetName: "DemoLocatedAt"
@@ -641,19 +661,19 @@ associationDefinitions:
           separator: "_"
     name: "subjectof1"
 
-  subjectof2:
-    fqn: "ol.subjectof"
-    entitySetName: "DemoSubjectOf"
+  bookedin:
+    fqn: "criminaljustice.bookedin"
+    entitySetName: "DemoBookedIn"
     src: "person"
     dst: "booking"
     propertyDefinitions:
-      ol.id:
-        type: "ol.id"
+      general.stringid:
+        type: "general.stringid"
         transforms:
         - !<transforms.ConcatTransform>
           columns: ["SubjectIdentification", "BookingID"]
           separator: "_"
-    name: "subjectof2"
+    name: "bookedin"
 
   arrestedby1:
     fqn: "ol.arrestedby"
