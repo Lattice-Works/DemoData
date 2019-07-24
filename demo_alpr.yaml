@@ -26,12 +26,12 @@ entityDefinitions:
       vehicle.licensenumber:
         type: "vehicle.licensenumber"
         column: "red_VRM"
-      # ol.licenseplateimage:
-      #   type: "ol.licenseplateimage"
-      #   column: "red_patch"
-      # ol.vehicleimage:
-      #   type: "ol.vehicleimage"
-      #   column: "red_overview"
+      ol.licenseplateimage:
+        type: "ol.licenseplateimage"
+        column: "red_patch"
+      ol.vehicleimage:
+        type: "ol.vehicleimage"
+        column: "red_overview"
       ol.datelogged:
         type: "ol.datelogged"
         column: "red_Timestamp"
@@ -39,22 +39,22 @@ entityDefinitions:
         - !<transforms.DateTimeTransform>
           pattern: ["MM/dd/yyyy hh:mm:ss a"]
           timezone: "America/Los Angeles"
-      # ol.locationcoordinates:
-      #   type: "ol.locationcoordinates"
-      #   transforms:
-      #   - !<transforms.GeographyPointTransform>
-      #     latTransforms:
-      #     - !<transforms.ColumnTransform>
-      #       column: "Location 1"
-      #     - !<transforms.SplitTransform>
-      #       separator: "," 
-      #       index: 0
-      #     lonTransforms:
-      #     - !<transforms.ColumnTransform>
-      #       column: "Location 1"
-      #     - !<transforms.SplitTransform>
-      #       separator: ","
-      #       index: 1
+      ol.locationcoordinates:
+        type: "ol.locationcoordinates"
+        transforms:
+        - !<transforms.GeographyPointTransform>
+          latTransforms:
+          - !<transforms.ColumnTransform>
+            column: "Location 1"
+          - !<transforms.SplitTransform>
+            separator: "," 
+            index: 0
+          lonTransforms:
+          - !<transforms.ColumnTransform>
+            column: "Location 1"
+          - !<transforms.SplitTransform>
+            separator: ","
+            index: 1
       publicsafety.agencyname:
         type: "publicsafety.agencyname"
         column: "agency"
