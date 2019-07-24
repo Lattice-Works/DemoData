@@ -142,7 +142,7 @@ entityDefinitions:
   #this is being separately integrated in own flight. 
   hits:
     fqn: "ol.notification"
-    entitySetName: "openlatticeinc_app_notification"
+    entitySetName: "openlatticeinc_app_notifications"
     propertyDefinitions:
       ol.id: 
         type: "ol.id"
