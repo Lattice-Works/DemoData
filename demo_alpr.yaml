@@ -41,7 +41,6 @@ entityDefinitions:
           timezone: "America/Los Angeles"
       ol.locationcoordinates:
         type: "ol.locationcoordinates"
-        column: "Location 1"
         transforms:
         - !<transforms.GeographyPointTransform>
           latTransforms:
