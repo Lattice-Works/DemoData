@@ -129,7 +129,7 @@ entityDefinitions:
 
   agencies:
     fqn: "ol.agency"
-    entitySetName: "openlatticeinc_app_agency"
+    entitySetName: "openlatticeinc_app_agencies"
     propertyDefinitions:
       ol.id: 
         type: "ol.id"
