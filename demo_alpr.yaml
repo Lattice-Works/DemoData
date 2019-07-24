@@ -1,16 +1,17 @@
 
 
 entityDefinitions:
+
   vehicles:
     fqn: "ol.vehicle"
     entitySetName: "openlatticeinc_app_vehicle"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        column: "red_vrm"
+        column: "red_VRM"
       vehicle.licensenumber:
         type: "vehicle.licensenumber"
-        column: "red_vrm"
+        column: "red_VRM"
     name: "vehicles"
 
   vehiclerecords:
@@ -21,10 +22,10 @@ entityDefinitions:
         type:  "ol.id" 
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ["red_vrm", "red_Timestamp", "Location 1"]
+          columns: ["red_VRM", "red_Timestamp", "Location 1"]
       vehicle.licensenumber:
         type: "vehicle.licensenumber"
-        column: "red_vrm"
+        column: "red_VRM"
       # ol.licenseplateimage:
       #   type: "ol.licenseplateimage"
       #   column: "red_patch"
@@ -36,7 +37,7 @@ entityDefinitions:
         column: "red_Timestamp"
         transforms:
         - !<transforms.DateTimeTransform>
-          pattern: ["MM/dd/yyyy HH:mm:ss a"]
+          pattern: ["MM/dd/yyyy hh:mm:ss a"]
           timezone: "America/Los Angeles"
       ol.locationcoordinates:
         type: "ol.locationcoordinates"
@@ -51,17 +52,17 @@ entityDefinitions:
           column: "make"
           transformsIfTrue: NULL
           transformsIfFalse: 
-          -!<transforms.ColumnTransform>
+          - !<transforms.ColumnTransform>
             column: "make"
-      vehicle.model:
-        type: "vehicle.model"
-        transforms:
-        - !<transforms.BooleanIsNullTransform>
-          column: "model"
-          transformsIfTrue: NULL
-          transformsIfFalse: 
-          -!<transforms.ColumnTransform>
-            column: "model"
+      # vehicle.model:
+      #   type: "vehicle.model"
+      #   transforms:
+      #   - !<transforms.BooleanIsNullTransform>
+      #     column: "model"
+      #     transformsIfTrue: NULL
+      #     transformsIfFalse: 
+      #     - !<transforms.ColumnTransform>
+      #       column: "model"
       vehicle.color:
         type: "vehicle.color"
         transforms:
@@ -69,7 +70,7 @@ entityDefinitions:
           column: "color"
           transformsIfTrue: NULL
           transformsIfFalse: 
-          -!<transforms.ColumnTransform>
+          - !<transforms.ColumnTransform>
             column: "color"
       ol.accessories:
         type: "ol.accessories"
@@ -78,7 +79,7 @@ entityDefinitions:
           column: "accessory"
           transformsIfTrue: NULL
           transformsIfFalse: 
-          -!<transforms.ColumnTransform>
+          - !<transforms.ColumnTransform>
             column: "accessory"
       vehicle.style:
         type: "vehicle.style"
@@ -87,7 +88,7 @@ entityDefinitions:
           column: "style"
           transformsIfTrue: NULL
           transformsIfFalse: 
-          -!<transforms.ColumnTransform>
+          - !<transforms.ColumnTransform>
             column: "style"
     name: "vehiclerecords"
 
@@ -154,8 +155,8 @@ entityDefinitions:
         column: "red_Timestamp"
         transforms:
         - !<transforms.DateTimeTransform>
-        pattern: ["MM/dd/yyyy HH:mm:ss a"]
-        timezone: "America/Los Angeles"
+          pattern: ["MM/dd/yyyy hh:mm:ss a"]
+          timezone: "America/Los Angeles"
     conditions:
     - !<conditions.BooleanIsNullCondition>
       column: "hits"
@@ -174,7 +175,7 @@ associationDefinitions:
         type: "ol.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ["red_vrm", "red_Timestamp", "Location 1"]
+          columns: ["red_VRM", "red_Timestamp", "Location 1"]
           separator: "_"
 
   recordedby2:
@@ -188,13 +189,13 @@ associationDefinitions:
         column: "red_Timestamp"
         transforms:
         - !<transforms.DateTimeTransform>
-          pattern: ["MM/dd/yyyy HH:mm:ss a"]
+          pattern: ["MM/dd/yyyy hh:mm:ss a"]
           timezone: "America/Los Angeles"
       general.stringid:
         type: "general.stringid"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ["red_Timestamp", "agency", "red_vrm"]
+          columns: ["red_Timestamp", "agency", "red_VRM"]
     name: "recordedby2"
 
   locatedat2:
@@ -207,7 +208,7 @@ associationDefinitions:
         type: "general.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ["red_vrm", "Location 1"]
+          columns: ["red_VRM", "Location 1"]
           separator: "_"
     name: "locatedat2"
 
@@ -221,12 +222,11 @@ associationDefinitions:
         type: "general.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ["red_vrm", "Location 1"]
+          columns: ["red_VRM", "Location 1"]
           separator: "_"
     name: "locatedat3"
 
-
-#this was commented out as hits was separated in its own flight. 
+  #this was commented out as hits was separated in its own flight. 
   resultsin1:
     fqn: "ol.resultsin"
     entitySetName: "openlatticeinc_app_resultsin"
@@ -237,9 +237,8 @@ associationDefinitions:
         type: "ol.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ["red_vrm", "hits", "red_Timestamp"]
+          columns: ["red_VRM", "hits", "red_Timestamp"]
     name: "resultsin1"
-    currentSync: true
 
   resultsin2:
     fqn: "ol.resultsin"
@@ -251,6 +250,5 @@ associationDefinitions:
         type: "ol.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ["red_vrm", "hits", "red_Timestamp"]
+          columns: ["red_VRM", "hits", "red_Timestamp"]
     name: "resultsin2"
-    currentSync: true
