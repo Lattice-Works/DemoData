@@ -43,7 +43,19 @@ entityDefinitions:
         type: "ol.locationcoordinates"
         column: "Location 1"
         transforms:
-        - !<transforms.ParseGeographyPointTransform> {}
+        - !<transforms.GeographyPointTransform>
+          latTransforms:
+          - !<transforms.ColumnTransform>
+            column: "Location 1"
+          - !<transforms.SplitTransform>
+            separator: ","
+            index: 0
+          lonTransforms:
+          - !<transforms.ColumnTransform>
+            column: "Location 1"
+          - !<transforms.SplitTransform>
+            separator: ","
+            index: 1
       publicsafety.agencyname:
         type: "publicsafety.agencyname"
         column: "agency"
