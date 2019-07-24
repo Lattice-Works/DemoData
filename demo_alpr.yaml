@@ -42,6 +42,8 @@ entityDefinitions:
       ol.locationcoordinates:
         type: "ol.locationcoordinates"
         column: "Location 1"
+        transforms:
+        - !<transforms.ParseGeographyPointTransform> {}
       publicsafety.agencyname:
         type: "publicsafety.agencyname"
         column: "agency"
