@@ -2,6 +2,7 @@
 
 
 entityDefinitions:
+  
   person:
     fqn: "general.person"
     entitySetName: "DemoArrestees"
@@ -29,7 +30,8 @@ entityDefinitions:
         column: "BirthDate"
         transforms:
         - !<transforms.DateTransform>
-          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy"]
+          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy"]
+          timezone: "America/Los_Angeles"
       nc.SSN:
         type: "nc.SSN"
         column: "SocialSecurityNumber"
@@ -50,7 +52,8 @@ entityDefinitions:
         column: "IncidentDate"
         transforms:
         - !<transforms.DateAsDateTimeTransform>
-          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy"]
+          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy"]
+          timezone: "America/Los_Angeles"
       publicsafety.drugspresent:
         type: "publicsafety.drugspresent"
         column: "DrugsPresent"
@@ -75,8 +78,8 @@ entityDefinitions:
       criminaljustice.localstatute:
         type: "criminaljustice.localstatute"
         column: "OffenseLocalStatute"
-      ol.notes:
-        type: "ol.notes"
+      ol.description:
+        type: "ol.description"
         column: "OffenseLocalText"
     name: "offense"
 
@@ -110,13 +113,16 @@ entityDefinitions:
         type: "ol.id"
         transforms:
         - !<transforms.ConcatTransform>
-          columns: ["ChargeLevel", "ChargeLevelState"]
+          columns: ["ChargeLevel", "ChargeLevelState", "OffenseLocalText"]
       ol.level:
         type: "ol.level"
         column: "ChargeLevel"
       ol.levelstate:
         type: "ol.levelstate"
         column: "ChargeLevelState"
+      ol.description:
+        type: "ol.description"
+        column: "OffenseLocalText"
     name: "charge"
 
 
@@ -157,6 +163,8 @@ entityDefinitions:
       person.ageatevent:
         type: "person.ageatevent"
         column: "AgeAtBooking"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
     name: "booking"
 
   arrest:
@@ -171,7 +179,8 @@ entityDefinitions:
         column: "ArrestDate"
         transforms:
         - !<transforms.DateAsDateTimeTransform>
-          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy"]
+          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy"]
+          timezone: "America/Los_Angeles"
       ol.category:
         type: "ol.category"
         column: "ArrestCategory"
@@ -206,6 +215,8 @@ entityDefinitions:
       ol.sexoffender:
         type: "ol.sexoffender"
         column: "RegisteredSexOffender"
+        transforms:
+        - !<transforms.ParseBoolTransform> {}
     conditions:
     - !<conditions.BooleanIsNullCondition>
       column: "RegisteredSexOffender"
@@ -440,7 +451,12 @@ associationDefinitions:
       transforms:
       - !<transforms.ConcatTransform>
         columns: ["ChargeID", "ChargeLevelState", "ChargeLevel"]
-    propertyDefinitions: {}
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["ChargeID", "ChargeLevelState", "ChargeLevel"]
     name: "registeredfor"
 
   employedby:
@@ -486,6 +502,11 @@ associationDefinitions:
         - !<transforms.ConcatTransform>
           columns: ["SubjectIdentification", "IncidentID"]
           separator: "_"
+      ol.role:
+        type: "ol.role"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Suspect"
     name: "involvedin1"
 
   involvedin2:
@@ -505,6 +526,11 @@ associationDefinitions:
         transforms:
         - !<transforms.ValueTransform>
           value: "Officer"
+      ol.roledescription:
+        type: "ol.roledescription"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Arresting"
     name: "involvedin2"
 
   involvedin3:
@@ -524,6 +550,11 @@ associationDefinitions:
         transforms:
         - !<transforms.ValueTransform>
           value: "Officer"
+      ol.roledescription:
+        type: "ol.roledescription"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Transporting"
     name: "involvedin3"
 
   involvedin4:
@@ -543,6 +574,11 @@ associationDefinitions:
         transforms:
         - !<transforms.ValueTransform>
           value: "Officer"
+      ol.roledescription:
+        type: "ol.roledescription"
+        transforms:
+        - !<transforms.ValueTransform>
+          value: "Releasing"
     name: "involvedin4"
 
   chargedwith:
