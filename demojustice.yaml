@@ -437,12 +437,7 @@ associationDefinitions:
       transforms:
       - !<transforms.ConcatTransform>
         columns: ["ChargeID", "ChargeLevelState", "ChargeLevel"]
-    propertyDefinitions:
-      ol.id:
-        type: "ol.id"
-        transforms:
-        - !<transforms.ConcatTransform>
-          columns: ["ChargeID", "ChargeLevelState", "ChargeLevel"]
+    propertyDefinitions: {}
     name: "registeredfor"
 
   employedby:
