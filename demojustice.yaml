@@ -2,6 +2,7 @@
 
 
 entityDefinitions:
+  
   person:
     fqn: "general.person"
     entitySetName: "DemoArrestees"
