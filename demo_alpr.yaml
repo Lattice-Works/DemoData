@@ -1,0 +1,267 @@
+
+
+entityDefinitions:
+
+  vehicles:
+    fqn: "ol.vehicle"
+    entitySetName: "openlatticeinc_app_vehicle"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "red_VRM"
+      vehicle.licensenumber:
+        type: "vehicle.licensenumber"
+        column: "red_VRM"
+    name: "vehicles"
+
+  vehiclerecords:
+    fqn: "ol.vehicle"
+    entitySetName: "openlatticeinc_app_vehiclerecord"
+    propertyDefinitions:
+      ol.id:
+        type:  "ol.id" 
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["red_VRM", "red_Timestamp", "Location 1"]
+      vehicle.licensenumber:
+        type: "vehicle.licensenumber"
+        column: "red_VRM"
+      ol.licenseplateimage:
+        type: "ol.licenseplateimage"
+        column: "red_patch"
+      ol.vehicleimage:
+        type: "ol.vehicleimage"
+        column: "red_overview"
+      ol.datelogged:
+        type: "ol.datelogged"
+        column: "red_Timestamp"
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ["MM/dd/yyyy hh:mm:ss a"]
+          timezone: "America/Los Angeles"
+      ol.locationcoordinates:
+        type: "ol.locationcoordinates"
+        transforms:
+        - !<transforms.GeographyPointTransform>
+          latTransforms:
+          - !<transforms.ColumnTransform>
+            column: "Location 1"
+          - !<transforms.SplitTransform>
+            separator: "," 
+            index: 0
+          lonTransforms:
+          - !<transforms.ColumnTransform>
+            column: "Location 1"
+          - !<transforms.SplitTransform>
+            separator: ","
+            index: 1
+      publicsafety.agencyname:
+        type: "publicsafety.agencyname"
+        column: "agency"
+      vehicle.make:
+        type: "vehicle.make"
+        transforms:
+        - !<transforms.BooleanIsNullTransform>
+          column: "make"
+          transformsIfTrue: NULL
+          transformsIfFalse: 
+          - !<transforms.ColumnTransform>
+            column: "make"
+      # vehicle.model:
+      #   type: "vehicle.model"
+      #   transforms:
+      #   - !<transforms.BooleanIsNullTransform>
+      #     column: "model"
+      #     transformsIfTrue: NULL
+      #     transformsIfFalse: 
+      #     - !<transforms.ColumnTransform>
+      #       column: "model"
+      vehicle.color:
+        type: "vehicle.color"
+        transforms:
+        - !<transforms.BooleanIsNullTransform>
+          column: "color"
+          transformsIfTrue: NULL
+          transformsIfFalse: 
+          - !<transforms.ColumnTransform>
+            column: "color"
+      ol.accessories:
+        type: "ol.accessories"
+        transforms:
+        - !<transforms.BooleanIsNullTransform>
+          column: "accessory"
+          transformsIfTrue: NULL
+          transformsIfFalse: 
+          - !<transforms.ColumnTransform>
+            column: "accessory"
+      vehicle.style:
+        type: "vehicle.style"
+        transforms:
+        - !<transforms.BooleanIsNullTransform>
+          column: "style"
+          transformsIfTrue: NULL
+          transformsIfFalse: 
+          - !<transforms.ColumnTransform>
+            column: "style"
+    name: "vehiclerecords"
+
+  # imagesources:
+  #   fqn: "ol.imagesource"
+  #   entitySetName: "NCRICImageSources"
+  #   propertyDefinitions:
+  #     ol.id:
+  #       type:  "ol.id" 
+  #       column: "sourceid"
+  #     ol.name:
+  #       type: "ol.name"
+  #       column: "sourcename"
+  #     ol.description:
+  #       type: "ol.description"
+  #       column: "srcdescr"
+  #     ol.fixedlocation:
+  #       type: "ol.fixedlocation"
+  #       column: "fixedmobile"
+  #       transforms:
+  #       - !<transforms.ReplaceTransform>
+  #         target: ["t", "f"]
+  #         goal: [true, false]
+  #         ignoreCase: true
+  #   name: "imagesources"
+
+  locations:
+    fqn: "ol.location"
+    entitySetName: "openlatticeinc_app_location"
+    propertyDefinitions:
+      general.id: 
+        type: "general.id"
+        column: "Location 1"
+      ol.locationcoordinates:
+        type: "ol.locationcoordinates"
+        column: "Location 1"
+    name: "locations"
+
+  agencies:
+    fqn: "ol.agency"
+    entitySetName: "openlatticeinc_app_agencies"
+    propertyDefinitions:
+      ol.id: 
+        type: "ol.id"
+        column: "agency" 
+      ol.name:
+        type: "ol.name"
+        column: "agency"
+    name: "agencies"
+
+  #this is being separately integrated in own flight. 
+  hits:
+    fqn: "ol.notification"
+    entitySetName: "openlatticeinc_app_notifications"
+    propertyDefinitions:
+      ol.id: 
+        type: "ol.id"
+        column: "hits"
+      ol.type:
+        type: ol.type
+        column: "hits"
+      general.datetime:
+        type: general.datetime
+        column: "red_Timestamp"
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ["MM/dd/yyyy hh:mm:ss a"]
+          timezone: "America/Los Angeles"
+    conditions:
+    - !<conditions.BooleanIsNullCondition>
+      column: "hits"
+      reverse: true
+    name: "hits"
+  
+
+associationDefinitions:
+  has:
+    fqn: "ol.has"
+    entitySetName: "openlatticeinc_app_has"
+    src: "vehicles"
+    dst: "vehiclerecords"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["red_VRM", "red_Timestamp", "Location 1"]
+          separator: "_"
+
+  recordedby2:
+    fqn: "ol.recordedby"
+    entitySetName: "openlatticeinc_app_recordedby"
+    src: "vehiclerecords"
+    dst: "agencies"
+    propertyDefinitions:
+      ol.datelogged:
+        type: "ol.datelogged"
+        column: "red_Timestamp"
+        transforms:
+        - !<transforms.DateTimeTransform>
+          pattern: ["MM/dd/yyyy hh:mm:ss a"]
+          timezone: "America/Los Angeles"
+      general.stringid:
+        type: "general.stringid"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["red_Timestamp", "agency", "red_VRM"]
+    name: "recordedby2"
+
+  locatedat2:
+    fqn: "ol.locatedat"
+    entitySetName: "openlatticeinc_app_locatedat"
+    src: "vehiclerecords"
+    dst: "locations"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["red_VRM", "Location 1"]
+          separator: "_"
+    name: "locatedat2"
+
+  locatedat3:
+    fqn: "ol.locatedat"
+    entitySetName: "openlatticeinc_app_locatedat"
+    src: "vehicles"
+    dst: "locations"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["red_VRM", "Location 1"]
+          separator: "_"
+    name: "locatedat3"
+
+  #this was commented out as hits was separated in its own flight. 
+  resultsin1:
+    fqn: "ol.resultsin"
+    entitySetName: "openlatticeinc_app_resultsin"
+    src: "vehiclerecords"
+    dst: "hits"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["red_VRM", "hits", "red_Timestamp"]
+    name: "resultsin1"
+
+  resultsin2:
+    fqn: "ol.resultsin"
+    entitySetName: "openlatticeinc_app_resultsin"
+    src: "vehicles"
+    dst: "hits"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["red_VRM", "hits", "red_Timestamp"]
+    name: "resultsin2"
