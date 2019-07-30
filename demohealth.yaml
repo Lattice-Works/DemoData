@@ -222,9 +222,9 @@ entityDefinitions:
 
 
 
-  diagnosis:
-    fqn: "ol.diagnosis"
-    entitySetName: "DemoDiagnoses"
+  healthcondition:
+    fqn: "ol.healthcondition"
+    entitySetName: "DemoHealthConditions"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -232,7 +232,7 @@ entityDefinitions:
       ol.description:
         type: "ol.description"
         column: "Diagnosis"
-    name: "diagnosis"
+    name: "healthcondition"
 
 
   insurance1:
@@ -392,6 +392,8 @@ entityDefinitions:
       ol.lengthofstay:
         type: "ol.lengthofstay"
         column: "LengthOfStayDays"
+        transforms:
+        - !<transforms.ParseDoubleTransform> {}
     name: "episodedetails"
 
   episode:
@@ -573,13 +575,11 @@ associationDefinitions:
           pattern: ["MM/dd/yy HH:mm:ss", "M/dd/yy", "MM/dd/yy H:mm:ss"]
     name: "presentsfor2"
 
-  # encounter -> resultsin -> diagnosis
-
-  resultsin:
-    fqn: "ol.resultsin"
-    entitySetName: "DemoResultsIn"
+  addresses:
+    fqn: "ol.addresses"
+    entitySetName: "DemoAddresses"
     src: "encounter"
-    dst: "diagnosis"
+    dst: "healthcondition"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -587,7 +587,7 @@ associationDefinitions:
         - !<transforms.ConcatTransform>
           columns: ["ID","Diagnosis"]
           separator: "_"
-    name: "resultsin"
+    name: "addresses"
 
   #person -> eligiblefor -> insurance
 
@@ -750,7 +750,7 @@ associationDefinitions:
   observedin5:
     fqn: "ol.observedin"
     entitySetName: "DemoObservedIn"
-    src: "diagnosis"
+    src: "healthcondition"
     dst: "person"
     propertyDefinitions:
       ol.id:
