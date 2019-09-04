@@ -594,6 +594,19 @@ associationDefinitions:
           columns: ["SubjectIdentification", "ChargeID"]
     name: "chargedwith"
 
+  chargedwith2:
+    fqn: "ol.chargedwith"
+    entitySetName: "DemoChargedWith"
+    src: "person"
+    dst: "charge"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["SubjectIdentification", "ChargeID"]
+    name: "chargedwith2"
+
   relatedto1:
     fqn: "ol.relatedto"
     entitySetName: "DemoRelatedTo"
