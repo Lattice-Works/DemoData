@@ -181,8 +181,8 @@ entityDefinitions:
         - !<transforms.DateAsDateTimeTransform>
           pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy"]
           timezone: "America/Los_Angeles"
-      ol.category:
-        type: "ol.category"
+      ol.type:
+        type: "ol.type"
         column: "ArrestCategory"
       criminaljustice.warranttype:
         type: "criminaljustice.warranttype"
