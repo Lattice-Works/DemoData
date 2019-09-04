@@ -692,19 +692,19 @@ associationDefinitions:
           separator: "_"
     name: "subjectof1"
 
-  bookedin:
-    fqn: "criminaljustice.bookedin"
-    entitySetName: "DemoBookedIn"
+  subjectof3:
+    fqn: "ol.subjectof"
+    entitySetName: "DemoSubjectOf"
     src: "person"
     dst: "booking"
     propertyDefinitions:
-      general.stringid:
-        type: "general.stringid"
+      ol.id:
+        type: "ol.id"
         transforms:
         - !<transforms.ConcatTransform>
           columns: ["SubjectIdentification", "BookingID"]
           separator: "_"
-    name: "bookedin"
+    name: "subjectof3"
 
   arrestedby1:
     fqn: "ol.arrestedby"
