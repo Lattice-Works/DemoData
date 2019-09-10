@@ -1,6 +1,4 @@
 
-
-
 entityDefinitions:
   
   person:
@@ -124,7 +122,6 @@ entityDefinitions:
         type: "ol.description"
         column: "OffenseLocalText"
     name: "charge"
-
 
   arrofficer:
     fqn: "ol.employee"
@@ -310,9 +307,9 @@ entityDefinitions:
           separator: ","
           valueElse: ""
         - !<transforms.ParseDoubleTransform> {}
-      # ol.locationcoordinates:
-      #   type: "ol.locationcoordinates"
-      #   column: "HomeCoords"
+      ol.locationcoordinates:
+        type: "ol.locationcoordinates"
+        column: "HomeCoords"
     name: "home_location"
 
   arrestingagency:
@@ -488,6 +485,13 @@ associationDefinitions:
         transforms:
         - !<transforms.ConcatTransform>
           columns: ["SentenceID", "SubjectIdentification"]
+      general.datetime:
+        type: "general.datetime"
+        column: "ArrestDate"
+        transforms:
+        - !<transforms.DateAsDateTimeTransform>
+          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy"]
+          timezone: "America/Los_Angeles"
     name: "sentencedwith"
 
   involvedin1:
@@ -507,6 +511,13 @@ associationDefinitions:
         transforms:
         - !<transforms.ValueTransform>
           value: "Suspect"
+      ol.datetimestart:
+        type: "ol.datetimestart"
+        column: "IncidentDate"
+        transforms:
+        - !<transforms.DateAsDateTimeTransform>
+          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy"]
+          timezone: "America/Los_Angeles"
     name: "involvedin1"
 
   involvedin2:
@@ -581,7 +592,7 @@ associationDefinitions:
           value: "Releasing"
     name: "involvedin4"
 
-  chargedwith:
+  chargedwith1:
     fqn: "ol.chargedwith"
     entitySetName: "DemoChargedWith"
     src: "person"
@@ -592,7 +603,34 @@ associationDefinitions:
         transforms:
         - !<transforms.ConcatTransform>
           columns: ["SubjectIdentification", "ChargeID"]
-    name: "chargedwith"
+      general.datetime:
+        type: "general.datetime"
+        column: "ArrestDate"
+        transforms:
+        - !<transforms.DateAsDateTimeTransform>
+          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy"]
+          timezone: "America/Los_Angeles"
+    name: "chargedwith1"
+
+  chargedwith2:
+    fqn: "ol.chargedwith"
+    entitySetName: "DemoChargedWith"
+    src: "person"
+    dst: "charge"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["SubjectIdentification", "ChargeID"]
+      general.datetime:
+        type: "general.datetime"
+        column: "ArrestDate"
+        transforms:
+        - !<transforms.DateAsDateTimeTransform>
+          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy"]
+          timezone: "America/Los_Angeles"
+    name: "chargedwith2"
 
   chargedwith2:
     fqn: "ol.chargedwith"
@@ -675,6 +713,13 @@ associationDefinitions:
         - !<transforms.ConcatTransform>
           columns: ["SubjectIdentification", "ChargeID"]
           separator: "_"
+      general.datetime:
+        type: "general.datetime"
+        column: "ArrestDate"
+        transforms:
+        - !<transforms.DateAsDateTimeTransform>
+          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy"]
+          timezone: "America/Los_Angeles"
     name: "suspectedof"
 
   transportedby:
@@ -703,6 +748,13 @@ associationDefinitions:
         - !<transforms.ConcatTransform>
           columns: ["SubjectIdentification", "ArrestNumber"]
           separator: "_"
+      date.completeddatetime:
+        type: "date.completeddatetime"
+        column: "ArrestDate"
+        transforms:
+        - !<transforms.DateAsDateTimeTransform>
+          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy"]
+          timezone: "America/Los_Angeles"
     name: "subjectof1"
 
   subjectof3:
