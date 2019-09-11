@@ -632,7 +632,7 @@ associationDefinitions:
           timezone: "America/Los_Angeles"
     name: "chargedwith2"
 
-  chargedwith2:
+  chargedwith3:
     fqn: "ol.chargedwith"
     entitySetName: "DemoChargedWith"
     src: "person"
@@ -643,7 +643,7 @@ associationDefinitions:
         transforms:
         - !<transforms.ConcatTransform>
           columns: ["SubjectIdentification", "ChargeID"]
-    name: "chargedwith2"
+    name: "chargedwith3"
 
   relatedto1:
     fqn: "ol.relatedto"
