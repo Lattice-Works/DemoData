@@ -2,8 +2,8 @@
 entityDefinitions:
 
   dispatch:
-    fqn: "ol.callforservice"
-    entitySetName: "DemoCallsForService"
+    fqn: "ol.dispatch"
+    entitySetName: "DemoDispatch"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -97,16 +97,16 @@ entityDefinitions:
 
 associationDefinitions:
 
-  addresses:
-    fqn: "ol.addresses"
-    entitySetName: "DemoAddresses"
+  resultsin:
+    fqn: "ol.resultsin"
+    entitySetName: "DemoResultsIn"
     src: "dispatch"
     dst: "incident"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
         column: "incident_id"
-    name: "addresses"
+    name: "resultsin"
 
   involvedin:
     fqn: "ol.involvedin"
