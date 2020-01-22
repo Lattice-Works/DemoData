@@ -204,7 +204,13 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: ol.id
-        column: name_id
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ColumnTransform>
+            column: name_id
+          - !<transforms.ValueTransform>
+            value: person_inmatedetails
     
   has2:
     fqn: ol.has
@@ -215,7 +221,13 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: ol.id
-        column: name_id
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ColumnTransform>
+            column: name_id
+          - !<transforms.ValueTransform>
+            value: person_inmatedetailscj
     
   has3:
     fqn: ol.has
@@ -226,7 +238,13 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: ol.id
-        column: name_id
+        transforms:
+        - !<transforms.ConcatCombineTransform>
+          transforms:
+          - !<transforms.ColumnTransform>
+            column: name_id
+          - !<transforms.ValueTransform>
+            value: person_education
     
   oflength:
     fqn: ol.oflength
