@@ -1,0 +1,36 @@
+,providername,serviceTypes,addresses,firstName,lastName,middleName,sex,dob,race,ethnicity,name_id,employee_addr,phone_number
+0,Deer Valley Sober House,"['Substance Abuse Treatment', 'Housing Assistance']",1427  Cottonwood Lane,Dwayne,Turk,F,M,1994-08-08,Black,Hispanic,71ad3ab4-430e-11ea-8c4d-acde48001122,9855 NE. Hill Field St.,(443) 896-4304
+1,Deer Valley Sober House,"['Substance Abuse Treatment', 'Housing Assistance']",1427  Cottonwood Lane,Carolyn,Howell,Timothy,M,1944-12-24,White,Non-Hispanic,71b94eee-430e-11ea-8c4d-acde48001122,151 Golf Ave.,(574) 569-1399
+2,Deer Valley Sober House,"['Substance Abuse Treatment', 'Housing Assistance']",1427  Cottonwood Lane,Hilda,Boucher,G,F,1944-04-20,,Declined,71bde2ec-430e-11ea-8c4d-acde48001122,31 Hillside Dr.,(474) 738-6863
+3,Deer Valley Sober House,"['Substance Abuse Treatment', 'Housing Assistance']",1427  Cottonwood Lane,Daniel,Medina,R,M,1946-02-06,White,Hispanic,71e8746c-430e-11ea-8c4d-acde48001122,16 Pacific Court,(970) 569-2509
+4,Main St. Food Bank,Food & Provisions,1674  American Drive,Mary,Bartko,N,M,1969-01-12,,,71b825c8-430e-11ea-8c4d-acde48001122,80 Wrangler St.,(597) 677-3944
+5,Main St. Food Bank,Food & Provisions,1674  American Drive,Nathan,Mems,M,M,1945-07-20,Unknown,Hispanic,71f77188-430e-11ea-8c4d-acde48001122,9 Oak Meadow Street,(295) 704-9453
+6,Main St. Food Bank,Food & Provisions,1674  American Drive,Raymond,Smith,D,M,2001-06-15,Whute,Hispanic,7200cb02-430e-11ea-8c4d-acde48001122,169 Tailwater Street,(595) 396-9831
+7,Coastside Road Home,Housing Assistance,1409  Joseph Street,Matthew,Ramirez,T,M,1981-06-08,White,Hispanic,71cb8b5e-430e-11ea-8c4d-acde48001122,214 White Dr.,(976) 956-5523
+8,TL Mercy House,Food & Provisions,1857  Kooter Lane,Keith,Caccavale,L,M,1946-09-18,White,Hispanic,71fb319c-430e-11ea-8c4d-acde48001122,778 Ridgeview Drive,(563) 736-8335
+9,Chinatown Employment Services,Employment Assistance,1958  Chapel Street,James,Dancer,R,M,1960-11-18,White,Non-Hispanic,71caa360-430e-11ea-8c4d-acde48001122,8099 Helen Ave.,(887) 797-0033
+10,Chinatown Employment Services,Employment Assistance,1958  Chapel Street,William,Megedith,Cassie,F,1955-01-30,White,Hispanic,71e99d42-430e-11ea-8c4d-acde48001122,8225 Thomas St.,(521) 381-4351
+11,Del Mar Rehab,Substance Abuse Treatment,4955  Snider Street,Tania,Garton,Kathern,F,2001-01-17,White,Non-Hispanic,71b25c7e-430e-11ea-8c4d-acde48001122,778 High Ridge Ave.,(299) 385-8008
+12,Del Mar Rehab,Substance Abuse Treatment,4955  Snider Street,Diana,Boesen,J,M,1990-05-11,,Hispanic,71c6ddd4-430e-11ea-8c4d-acde48001122,74 Blue Spring Court,(274) 896-2015
+13,Del Mar Rehab,Substance Abuse Treatment,4955  Snider Street,Armand,France,H,,1968-01-11,Rhite,Unknown,71e1f7a4-430e-11ea-8c4d-acde48001122,7901 Rock Creek Lane,(495) 821-6860
+14,Del Mar Rehab,Substance Abuse Treatment,4955  Snider Street,Jeremy,Morehouse,C,M,1940-12-25,Other,Hispanic,71e6626c-430e-11ea-8c4d-acde48001122,68 Virginia Street,(751) 892-3875
+15,Del Mar Rehab,Substance Abuse Treatment,4955  Snider Street,Donte,Patrick,G,F,1976-08-09,Unknown,Hispanic,71fc0c8e-430e-11ea-8c4d-acde48001122,9279 Winding Way Ave.,(233) 670-7851
+16,Greenville Daycare,Child Care,3736  Melody Lane,James,Conroy,A,M,1946-09-19,Ehite,Hispanic,71cc8d60-430e-11ea-8c4d-acde48001122,75 Westminster Ave.,(339) 528-4588
+17,Greenville Daycare,Child Care,3736  Melody Lane,Nicholas,Worrzll,Sheila,F,1991-02-18,White,Hispanic,71d2651e-430e-11ea-8c4d-acde48001122,422 Roosevelt Ave.,(898) 322-0877
+18,Greenville Daycare,Child Care,3736  Melody Lane,Jae,Hofheimer,C,M,1993-02-20,White,Hispanic,71df202e-430e-11ea-8c4d-acde48001122,229 Glenholme Court,(221) 377-1743
+19,Desert Goodwill,Clothing,2683  Godfrey Road,Eva,Cruz,Vicky,F,1944-08-31,Black,Hispanic,71d9ef6e-430e-11ea-8c4d-acde48001122,7 Rockville Ave.,(857) 398-0937
+20,Bayside Tutoring,Education/Vocational Training,141  Mutton Town Road,John,Naqmin,C,F,1943-03-24,White,Hispanic,71fe05b6-430e-11ea-8c4d-acde48001122,7032 North Harvey Road,(597) 872-3998
+21,United Family Services,Family Support,1846  Pinewood Avenue,Barbara,Downing,N,M,1946-02-03,Other,Hispanic,71ae8e46-430e-11ea-8c4d-acde48001122,5 Orange Street,(774) 895-8540
+22,United Family Services,Family Support,1846  Pinewood Avenue,Nathan,Lucacelli,E,M,1961-09-15,White,Hispanic,7203c398-430e-11ea-8c4d-acde48001122,741 North St.,(910) 929-8096
+23,Casa Unidos,"['Housing Assistance', 'Child Care', 'Education/Vocational Training', 'Family Support']",4704  Westwood Avenue,Bradley,Stoner,Millie,M,1958-11-27,White,Hispanic,71d75164-430e-11ea-8c4d-acde48001122,538 Proctor Ave.,(220) 872-0034
+24,Central Supportive Service,"['Mental Health Treatment', 'Substance Abuse Treatment', 'Employment Assistance']",4012  Willow Greene Drive,Travis,Donoho,Nanette,F,1982-05-30,,,71ce80a2-430e-11ea-8c4d-acde48001122,9251 Trenton Drive,(516) 546-1630
+25,Central Supportive Service,"['Mental Health Treatment', 'Substance Abuse Treatment', 'Employment Assistance']",4012  Willow Greene Drive,Kelly,Carpentcc,J,M,1974-03-17,White,Hispanic,71cfaf72-430e-11ea-8c4d-acde48001122,853 Myers Rd.,(262) 723-4184
+26,Central Supportive Service,"['Mental Health Treatment', 'Substance Abuse Treatment', 'Employment Assistance']",4012  Willow Greene Drive,Bryan,Stanley,L,M,1950-10-28,Blavk,Hispanic,71d09f22-430e-11ea-8c4d-acde48001122,38 Ridgeview Ave.,(801) 739-7849
+27,Central Supportive Service,"['Mental Health Treatment', 'Substance Abuse Treatment', 'Employment Assistance']",4012  Willow Greene Drive,Mitzi,Murphb,D,F,1990-09-03,Vlack,Declined,71e76040-430e-11ea-8c4d-acde48001122,7146 West Valley Farms Lane,(491) 445-0382
+28,Central Supportive Service,"['Mental Health Treatment', 'Substance Abuse Treatment', 'Employment Assistance']",4012  Willow Greene Drive,Elna,Cyrus,D,,1972-01-27,White,Hispanic,71f096c4-430e-11ea-8c4d-acde48001122,52 Pumpkin Hill Avenue,(229) 803-8678
+29,Central Supportive Service,"['Mental Health Treatment', 'Substance Abuse Treatment', 'Employment Assistance']",4012  Willow Greene Drive,Darren,Martin,D,F,1963-01-26,White,Hispanic,7204fe16-430e-11ea-8c4d-acde48001122,225 Riverside Ave.,(395) 321-9084
+30,Central Supportive Service,"['Mental Health Treatment', 'Substance Abuse Treatment', 'Employment Assistance']",4012  Willow Greene Drive,Linda,Morros,G,F,1951-02-16,White,Hispanic,7205dea8-430e-11ea-8c4d-acde48001122,6 Maiden Drive,(534) 455-7300
+31,Central Supportive Service,"['Mental Health Treatment', 'Substance Abuse Treatment', 'Employment Assistance']",4012  Willow Greene Drive,James,White,Conrqd,F,1978-05-20,White,Hispanic,7206b3aa-430e-11ea-8c4d-acde48001122,8801 Ridgewood St.,(960) 501-7295
+32,Pacific Charities,"['Food & Provisions', 'Clothing']",4364  Simpson Square,Gary,Tenecia,J,M,1995-05-27,Asian,Unknown,71d62762-430e-11ea-8c4d-acde48001122,9257 Indian Summer Road,(356) 872-6557
+33,Pacific Charities,"['Food & Provisions', 'Clothing']",4364  Simpson Square,Eita,Harp,J,M,1975-04-15,Other,Hispanic,71d8caa8-430e-11ea-8c4d-acde48001122,9341 Cedarwood Lane,(283) 941-8942
+34,YWCA,"['Family Support', 'Child Care']",2074  Hedge Street,Billy,Emrick,P,M,1940-02-15,Whnne,Hispanic,71ffeea8-430e-11ea-8c4d-acde48001122,7852 S. Washington St.,(607) 473-9472
