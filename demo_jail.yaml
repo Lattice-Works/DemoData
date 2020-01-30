@@ -31,7 +31,7 @@ entityDefinitions:
         column: "dob"
         transforms:
         - !<transforms.DateTransform>
-          pattern: ["yyyy/MM/dd"]
+          pattern: ["yyyy-MM-dd"]
           timezone: "America/Los_Angeles"
       nc.SSN:
         type: "nc.SSN"
@@ -54,21 +54,21 @@ entityDefinitions:
         transforms:
         - !<transforms.DateTimeTransform>
           pattern: ["MM/dd/yyyy HH:mm"]
-          timezone: "America/New York"
+          timezone: "America/Los_Angeles"
       ol.projectedreleasedatetime:
         type: "ol.projectedreleasedatetime"
         column: projectedreleasedatetime
         transforms:
         - !<transforms.DateTimeTransform>
           pattern: ["MM/dd/yyyy HH:mm"]
-          timezone: "America/New York"
+          timezone: "America/Los_Angeles"
       ol.releasedatetime:
         type: ol.releasedatetime
         column: releasedatetime
         transforms:
         - !<transforms.DateTimeTransform>
           pattern: ["MM/dd/yyyy HH:mm"]
-          timezone: "America/New York"
+          timezone: "America/Los_Angeles"
       ol.reasoncode:
         type: "ol.reasoncode"
         column: "confreason"
