@@ -1,0 +1,69 @@
+entityDefinitions:
+  person:
+    fqn: general.person
+    entitySetName: DemoProviderEmployees
+    properties:
+    - nc.SubjectIdentification
+    - nc.PersonGivenName
+    - nc.PersonMiddlename
+    - nc.PersonLastName
+    - nc.PersonSex
+    - nc.PersonBirthDate
+    - nc.PersonEthnicity
+    - nc.PersonRace
+    name: person
+  contactinfo:
+    fqn: ol.contactinformation
+    entitySetName: EmployeeContacts
+    properties:
+    - general.id
+    - contact.cellphone
+    - general.notes
+    name: contactinfo
+  provider:
+    fqn: ol.facility
+    entitySetName: DemoServiceProviders
+    properties:
+    - general.id
+    - ol.type
+    - location.name
+    name: provider
+  employee:
+    fqn: ol.employee
+    entitySetName: DemoEmployees
+    properties:
+    - ol.id
+    name: employee
+associationDefinitions:
+  is:
+    fqn: o.is
+    src: person
+    dst: employee
+    entitySetName: DemoIs
+    properties:
+    - ol.id
+    name: is
+  worksat:
+    fqn: ol.worksat
+    src: employee
+    dst: provider
+    entitySetName: DemoWorksAt
+    properties:
+    - ol.id
+    name: worksat
+  contactedvia1:
+    fqn: ol.contactedvia
+    src: person
+    dst: contactinfo
+    entitySetName: DemoContactedVia
+    properties:
+    - ol.id
+    name: contactedvia1
+  contactedvia2:
+    fqn: ol.contactedvia
+    src: employee
+    dst: contactinfo
+    entitySetName: DemoContactedVia
+    properties:
+    - ol.id
+    name: contactedvia2
