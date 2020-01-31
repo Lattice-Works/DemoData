@@ -64,8 +64,8 @@ entityDefinitions:
       general.id:
         type: "general.id"
         column: "name_id"
-      location.address:
-        type: "location.address"
+      location.street:
+        type: "location.street"
         column: "addresses"
     name: "location"
   employee:
