@@ -1,0 +1,132 @@
+entityDefinitions:
+    
+  person:
+    fqn: "general.person"
+    entitySetName: "DemoProviderEmployees"
+    propertyDefinitions:
+      nc.SubjectIdentification:
+        type: "nc.SubjectIdentification"
+        column: "name_id"
+      nc.PersonGivenName:
+        type: "nc.PersonGivenName"
+        column: "firstName"
+      nc.PersonMiddleName:
+        type: "nc.PersonMiddleName"
+        column: "middleName"
+      nc.PersonSurName:
+        type: "nc.PersonSurName"
+        column: "lastName"
+      nc.PersonSex:
+        type: "nc.PersonSex"
+        column: "sex"
+      nc.PersonBirthDate:
+        type: "nc.PersonBirthDate"
+        column: "dob"
+        transforms:
+        - !<transforms.DateTransform>
+          pattern: ["yyyy-MM-dd"]
+      nc.PersonEthnicity:
+        type: "nc.PersonEthnicity"
+        column: "ethnicity"
+      nc.PersonRace:
+        type: "nc.PersonRace"
+        column: "race"
+    name: "person"
+  contactinfo:
+    fqn: "ol.contactinformation"
+    entitySetName: "EmployeeContacts"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "name_id"
+      contact.phonenumber:
+        type: "contact.phonenumber"
+        column: "phone_number"
+    name: "contactinfo"
+  provider:
+    fqn: "ol.organization"
+    entitySetName: "DemoServiceProviders"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "providername"
+      ol.name:
+        type: "ol.name"
+        column: "providername"
+      ol.type:
+        type: "ol.type"
+        column: "serviceTypes"
+    name: "provider"
+  location:
+    fqn: "ol.location"
+    entitySetName: "DemoProviderLocations"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "name_id"
+      location.address:
+        type: "location.address"
+        column: "addresses"
+    name: "location"
+  employee:
+    fqn: "ol.employee"
+    entitySetName: "DemoEmployees"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "name_id"
+    name: "employee"
+
+associationDefinitions:
+
+  is:
+    fqn: "o.is"
+    src: "person"
+    dst: "employee"
+    entitySetName: "DemoIs"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "name_id"
+    name: "is"
+  worksat:
+    fqn: "ol.worksat"
+    src: "employee"
+    dst: "provider"
+    entitySetName: "DemoWorksAt"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+        - !<transforms.ConcatTransform>
+          columns: ["name_id", "providername"]
+    name: "worksat"
+  contactedvia1:
+    fqn: "ol.contactedvia"
+    src: "person"
+    dst: "contactinfo"
+    entitySetName: "DemoContactedVia"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "name_id"
+  contactedvia2:
+    fqn: "ol.contactedvia"
+    src: "employee"
+    dst: "contactinfo"
+    entitySetName: "DemoContactedVia"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "name_id"
+    name: "contactedvia2"
+  locatedat:
+    fqn: "ol.locatedat"
+    src: "provider"
+    dst: "location"
+    entitySetName: "DemoLocatedAt"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "name_id"
+    name: "locatedat"
