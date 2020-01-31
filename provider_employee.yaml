@@ -130,3 +130,4 @@ associationDefinitions:
         type: "general.id"
         column: "name_id"
     name: "locatedat"
+
