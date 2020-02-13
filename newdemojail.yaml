@@ -1,0 +1,772 @@
+entityDefinitions:
+  inmate:
+    fqn: "general.person"
+    entitySetName: "DemoPerson"
+    propertyDefinitions:
+      nc.SubjectIdentification:
+        type: "nc.SubjectIdentification"
+        column: "SubjectIdentification"
+      nc.PersonSurName:
+        type: "nc.PersonSurName"
+        column: "LastName"
+      nc.PersonGivenName:
+        type: "nc.PersonGivenName"
+        column: "FirstName"
+      nc.PersonMiddleName:
+        type: "nc.PersonMiddleName"
+        column: "MiddleName"
+      nc.PersonBirthDate:
+        type: "nc.PersonBirthDate"
+        column: "BirthDate"
+      nc.PersonSex:
+        type: "nc.PersonSex"
+        column: "Sex"
+      nc.SSN:
+        type: "nc.SSN"
+        column: "SocialSecurityNumber"
+      nc.PersonRace:
+        type: "nc.PersonRace"
+        column: "Race"
+      nc.PersonEthnicity:
+        type: "nc.PersonEthnicity"
+        column: "Ethnicity"
+    name: "inmate"
+  persondetails:
+    fqn: "ol.persondetails"
+    entitySetName: "DemoPersondetails"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "SubjectIdentification"
+      person.maritalstatus:
+        type: "person.maritalstatus"
+        column: "MaritalStatus"
+      person.gender:
+        type: "person.gender"
+        column: "Gender"
+      person.juvenile:
+        type: "person.juvenile"
+        column: "Juvenile"
+    name: "persondetails"
+  education:
+    fqn: "ol.education"
+    entitySetName: "DemoEducation"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "SubjectIdentification"
+      # ol.highesteducation_enum:
+      #   type: "ol.highesteducation_enum"
+      #   column: "Education"
+    name: "education"
+  facility:
+    fqn: "ol.location"
+    entitySetName: "DemoFacility"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "Facility"
+      location.name:
+        type: "location.name"
+        column: "Facility"
+    name: "facility"
+  jailstay:
+    fqn: "ol.jailstay"
+    entitySetName: "DemoJailstay"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "BookId"
+      incident.startdatetime:
+        type: "incident.startdatetime"
+        column: "SentenceStartDate"
+        transforms:
+        - !<transforms.DateAsDateTimeTransform>
+          pattern: ['yyyy-MM-dd']
+          timezone: "America/Los Angeles"
+      ol.projectedreleasedate:
+        type: "ol.projectedreleasedatetime"
+        column: "SentenceEndDate"
+        transforms:
+        - !<transforms.DateAsDateTimeTransform>
+          pattern: ['yyyy-MM-dd']
+          timezone: "America/Los Angeles"
+      ol.releasedate:
+        type: "ol.releasedatetime"
+        column: "ReleaseDate"
+        transforms:
+        - !<transforms.DateAsDateTimeTransform>
+          pattern: ['yyyy-MM-dd']
+          timezone: "America/Los Angeles"
+      criminaljustice.releasetype:
+        type: "criminaljustice.releasetype"
+        column: "ReleaseType"
+    name: "jailstay"
+  jailstaylength:
+    fqn: "ol.jailstaylength"
+    entitySetName: "DemoJailstaylength"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "JailstayLength"
+      criminaljustice.timeserveddays:
+        type: "criminaljustice.timeserveddays"
+        column: "JailstayLength"
+        transforms:
+        - !<transforms.ParseIntTransform> {}
+    name: "jailstaylength"    
+  courtcase:
+    fqn: "justice.case"
+    entitySetName: "DemoCourtCase"
+    propertyDefinitions:
+      j.CaseNumberText:
+        type: "j.CaseNumberText"
+        column: "DocketNo"
+      justice.courtcasenumber:
+        type: "justice.courtcasenumber"
+        column: "DocketNo"
+    name: "courtcase"
+  hearing:
+    fqn: "justice.case"
+    entitySetName: "DemoHearing"
+    propertyDefinitions:
+      j.CaseNumberText:
+        type: "j.CaseNumberText"
+        column: "DocketNo"
+      justice.courtcasenumber:
+        type: "justice.courtcasenumber"
+        column: "DocketNo"
+      general.datetime:
+        type: "general.datetime"
+        column: "HearingDate"
+        transforms:
+        - !<transforms.DateAsDateTimeTransform>
+          pattern: ['yyyy-MM-dd']
+          timezone: "America/Los Angeles"
+      ol.type:
+        type: "ol.type"
+        column: "HearingType"
+    name: "hearing"
+  mentalhealthstatus:
+    fqn: "ol.healthcondition"
+    entitySetName: "DemoMentalHealth"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "MentalHealthStatus"
+      ol.description:
+        type: "ol.description"
+        column: "MentalHealthStatus"
+    name: "mentalhealthstatus"
+  sexoffenderstatus:
+    fqn: "ol.sexoffender"
+    entitySetName: "DemoSexoffenderstatus"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "SexOffender"
+      ol.registeredflag:
+        type: "ol.registeredflag"
+        column: "SexOffender"
+    name: "sexoffenderstatus"
+  county:
+    fqn: "ol.location"
+    entitySetName: "DemoLocation"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "SexOffenderCounty"
+      ol.county:
+        type: "ol.county"
+        column: "SexOffenderCounty"
+    name: "county"
+  sentence:
+    fqn: "ol.sentence"
+    entitySetName: "DemoSentence"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "SentenceId"
+      datetime.received:
+        type: "datetime.received"
+        column: "SentenceDate"
+        transforms:
+        - !<transforms.DateAsDateTimeTransform>
+          pattern: ['yyyy-MM-dd']
+          timezone: "America/Los Angeles"
+    name: "sentence"
+  sentenceterm:
+    fqn: "ol.sentenceterm"
+    entitySetName: "DemoSentenceterms"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "SentenceId"
+      ol.datetimestart:
+        type: "ol.datetimestart"
+        column: "SentenceStartDate"
+        transforms:
+        - !<transforms.DateAsDateTimeTransform>
+          pattern: ['yyyy-MM-dd']
+          timezone: "America/Los Angeles"
+      ol.projectedenddatetime:
+        type: "ol.projectedenddatetime"
+        column: "SentenceEndDate"
+        transforms:
+        - !<transforms.DateAsDateTimeTransform>
+          pattern: ['yyyy-MM-dd']
+          timezone: "America/Los Angeles"
+    name: "sentenceterm"
+  parole:
+    fqn: "ol.supervision"
+    entitySetName: "DemoParole"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["SubjectIdentification","HearingDate"]
+      ol.supervisioninstituted:
+        type: "ol.supervisioninstituted"
+        column: "HearingDate"
+    conditions:
+    - !<conditions.BooleanRegexCondition>
+      column: "HearingType"
+      pattern: "Parole"
+      reverse: false
+    name: "parole"
+  probation:
+    fqn: "ol.supervision"
+    entitySetName: "DemoProbation"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["SubjectIdentification","HearingDate"]
+      ol.supervisioninstituted:
+        type: "ol.supervisioninstituted"
+        column: "HearingDate"
+    conditions:
+    - !<conditions.BooleanRegexCondition>
+      column: "HearingType"
+      pattern: "Probation"
+      reverse: false
+    name: "probation"
+
+  paroleofficer:
+    fqn: "general.person"
+    entitySetName: "DemoParoleOfficers"
+    propertyDefinitions:
+      nc.SubjectIdentification:
+        type: "nc.SubjectIdentification"
+        column: "OfficerPhoneNo"
+      nc.PersonGivenName:
+        type: "nc.PersonGivenName"
+        column: "OfficerPhoneNo"
+      nc.PersonMiddleName:
+        type: "nc.PersonMiddleName"
+        column: "OfficerPhoneNo"
+      nc.PersonSurName:
+        type: "nc.PersonSurName"
+        column: "OfficerPhoneNo"
+    conditions:
+    - !<conditions.BooleanRegexCondition>
+      column: "HearingType"
+      pattern: "Parole"
+      reverse: false
+    name: "paroleofficer"
+
+  probationofficer:
+    fqn: "general.person"
+    entitySetName: "DemoProbationOfficers"
+    propertyDefinitions:
+      nc.SubjectIdentification:
+        type: "nc.SubjectIdentification"
+        column: "OfficerPhoneNo"
+      nc.PersonGivenName:
+        type: "nc.PersonGivenName"
+        column: "OfficerPhoneNo"
+      nc.PersonMiddleName:
+        type: "nc.PersonMiddleName"
+        column: "OfficerPhoneNo"
+      nc.PersonSurName:
+        type: "nc.PersonSurName"
+        column: "OfficerPhoneNo"
+    conditions:
+    - !<conditions.BooleanRegexCondition>
+      column: "HearingType"
+      pattern: "Probation"
+      reverse: false
+    name: "probationofficer"
+
+  paroleattorney:
+    fqn: "general.person"
+    entitySetName: "DemoParoleAttorneys"
+    propertyDefinitions:
+      nc.SubjectIdentification:
+        type: "nc.SubjectIdentification"
+        column: "AttorneyPhoneNo"
+      nc.PersonGivenName:
+        type: "nc.PersonGivenName"
+        column: "AttorneyFirstName"
+      nc.PersonMiddleName:
+        type: "nc.PersonMiddleName"
+        column: "AttorneyMiddleName"
+      nc.PersonSurName:
+        type: "nc.PersonSurName"
+        column: "AttorneyLastName"
+    conditions:
+    - !<conditions.BooleanRegexCondition>
+      column: "HearingType"
+      pattern: "Parole"
+      reverse: false
+    name: "paroleattorney"
+
+  probationattorney:
+    fqn: "general.person"
+    entitySetName: "DemoProbationAttorneys"
+    propertyDefinitions:
+      nc.SubjectIdentification:
+        type: "nc.SubjectIdentification"
+        column: "AttorneyPhoneNo"
+      nc.PersonGivenName:
+        type: "nc.PersonGivenName"
+        column: "AttorneyFirstName"
+      nc.PersonMiddleName:
+        type: "nc.PersonMiddleName"
+        column: "AttorneyMiddleName"
+      nc.PersonSurName:
+        type: "nc.PersonSurName"
+        column: "AttorneyLastName"
+    conditions:
+    - !<conditions.BooleanRegexCondition>
+      column: "HearingType"
+      pattern: "Probation"
+      reverse: false
+    name: "probationattorney"
+
+  attorney:
+    fqn: "ol.occupation"
+    entitySetName: "DemoAttorneys"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "AttorneyPhoneNo"
+      ol.type:
+        type: "ol.type"
+        column: "HearingType"
+    name: "attorney"
+  
+  officer:
+    fqn: "ol.employee"
+    entitySetName: "DemoOfficers"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "OfficerPhoneNo"
+      ol.category:
+        type: "ol.category"
+        column: "HearingType"
+    name: "officer"
+
+  officercontactinformation:
+    fqn: "ol.contactinformation"
+    entitySetName: "DemoOfficerContacts"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "OfficerPhoneNo"
+      contact.phonenumber:
+        type: "contact.phonenumber"
+        column: "OfficerPhoneNo"
+      staff.email:
+        type: "staff.email"
+        column: "OfficerEmail"
+      ol.type:
+        type: "ol.type"
+        column: "HearingType"
+    name: "officercontactinformation"
+
+  
+  attorneycontactinformation:
+    fqn: "ol.contactinformation"
+    entitySetName: "DemoAttorneyContacts"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "AttorneyPhoneNo"
+      contact.phonenumber:
+        type: "contact.phonenumber"
+        column: "AttorneyPhoneNo"
+      staff.email:
+        type: "staff.email"
+        column: "AttorneyEmail"
+      ol.type:
+        type: "ol.type"
+        column: "HearingType"
+    name: "attorneycontactinformation"
+
+  
+
+associationDefinitions:
+  subjectof:
+    fqn: "ol.subjectof"
+    src: "inmate"
+    dst: "jailstay"
+    entitySetName: "DemoSubjectof"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["SubjectIdentification","BookId"]
+    name: "subjectof"
+  subjectof2:
+    fqn: "ol.subjectof"
+    src: "inmate"
+    dst: "parole"
+    entitySetName: "DemoSubjectof"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["SubjectIdentification","HearingDate"]
+    name: "subjectof2"
+  subjectof3:
+    fqn: "ol.subjectof"
+    src: "inmate"
+    dst: "probation"
+    entitySetName: "DemoSubjectof"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["SubjectIdentification","HearingDate"]
+    name: "subjectof2"
+  appearsin:
+    fqn: "ol.appearsin"
+    src: "inmate"
+    dst: "courtcase"
+    entitySetName: "DemoAppearsIn"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["SubjectIdentification","DocketNo"]
+    name: "appearsin"
+  appearsin2:
+    fqn: "ol.appearsin"
+    src: "inmate"
+    dst: "hearing"
+    entitySetName: "DemoAppearsIn"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["SubjectIdentification","DocketNo"]
+    name: "appearsin2"
+  reported:
+    fqn: "ol.reported"
+    src: "inmate"
+    dst: "persondetails"
+    entitySetName: "DemoReported"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["SubjectIdentification","SubjectIdentification"]
+    name: "reported"
+  reported2:
+    fqn: "ol.reported"
+    src: "inmate"
+    dst: "education"
+    entitySetName: "DemoReported"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["SubjectIdentification","SubjectIdentification"]
+    name: "reported2"
+  reported3:
+    fqn: "ol.reported"
+    src: "inmate"
+    dst: "sexoffenderstatus"
+    entitySetName: "DemoReported"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["SubjectIdentification","SexOffender"]
+    name: "reported3"
+  isregisteredsexoffenderin:
+    fqn: "ol.isregisteredsexoffenderin"
+    src: "inmate"
+    dst: "county"
+    entitySetName: "DemoIsregisteredsexoffenderin"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["SubjectIdentification","SexOffenderCounty"]
+    name: "isregisteredsexoffenderin"
+  registeredin:
+    fqn: "ol.registeredin"
+    src: "sexoffenderstatus"
+    dst: "county"
+    entitySetName: "DemoRegisteredin"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["SexOffender","SexOffenderCounty"]
+    name: "registeredin"
+  resultsin:
+    fqn: "ol.resultsin"
+    src: "sentence"
+    dst: "jailstay"
+    entitySetName: "DemoResultsin"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["SentenceId","BookId"]
+    name: "resultsin"
+  oflength2:
+    fqn: "ol.oflength"
+    src: "jailstay"
+    dst: "jailstaylength"
+    entitySetName: "DemoLengthof"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["BookId","JailstayLength"]
+    name: "oflength2"
+  partof:
+    fqn: "ol.partof"
+    src: "hearing"
+    dst: "courtcase"
+    entitySetName: "DemoPartof"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "DocketNo"
+    name: "partof"
+  partof2:
+    fqn: "ol.partof"
+    src: "jailstay"
+    dst: "courtcase"
+    entitySetName: "DemoPartof"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["BookId","DocketNo"]
+    name: "partof2"
+  observedin:
+    fqn: "ol.observedin"
+    src: "mentalhealthstatus"
+    dst: "inmate"
+    entitySetName: "DemoObservedin"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["MentalHealthStatus","SubjectIdentification"]
+    name: "observedin"
+  occurredduring:
+    fqn: "ol.occurredduring"
+    src: "mentalhealthstatus"
+    dst: "jailstay"
+    entitySetName: "DemoOccurredduring"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["MentalHealthStatus","BookId"]
+    name: "occurredduring"
+  oflength:
+    fqn: "ol.oflength"
+    dst: "sentenceterm"
+    src: "sentence"
+    entitySetName: "DemoOfLength"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["SentenceId","SentenceId"]
+    name: "oflength"
+  partof4:
+    fqn: "ol.partof"
+    dst: "jailstay"
+    src: "sentenceterm"
+    entitySetName: "DemoPartOf"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["SentenceId","BookId"]
+    name: "partof4"
+  locatedat:
+    fqn: "ol.locatedat"
+    src: "jailstay"
+    dst: "facility"
+    entitySetName: "DemoLocatedAt"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["BookId","Facility"]
+    name: "locatedat"
+  sentencedwith:
+    fqn: "ol.sentencedwith"
+    dst: "sentence"
+    src: "inmate"
+    entitySetName: "DemoSentencedWith"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["SubjectIdentification","SentenceId"]
+    name: "sentencedwith"
+  resultsin2:
+    fqn: "ol.resultsin"
+    src: "courtcase"
+    dst: "sentence"
+    entitySetName: "DemoResultsIn"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["DocketNo","SentenceId"]
+    name: "resultsin2"
+
+  is:
+    fqn: "ol.is"
+    src: "paroleofficer"
+    dst: "officer"
+    entitySetName: "DemoIs"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "OfficerPhoneNo"
+    name: "is"
+  is2:
+    fqn: "ol.is"
+    src: "probationofficer"
+    dst: "officer"
+    entitySetName: "DemoIs"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "OfficerPhoneNo"
+    name: "is2"
+  assignedto:
+    fqn: "ol.assignedto"
+    src: "officer"
+    dst: "inmate"
+    entitySetName: "DemoAssignedto"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["OfficerPhoneNo","SubjectIdentification"]
+    name: "assignedto"
+  assignedto1:
+    fqn: "ol.assignedto"
+    src: "officer"
+    dst: "parole"
+    entitySetName: "DemoAssignedto1"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["SubjectIdentification","HearingDate", "OfficerPhoneNo"]
+    name: "assignedto1"
+  assignedto2:
+    fqn: "ol.assignedto"
+    src: "officer"
+    dst: "probation"
+    entitySetName: "DemoAssignedto2"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["SubjectIdentification","HearingDate", "OfficerPhoneNo"]
+    name: "assignedto2"
+  contactedvia:
+    fqn: "ol.contactedvia"
+    src: "officer"
+    dst: "officercontactinformation"
+    entitySetName: "DemoContactedvia"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "OfficerPhoneNo"
+    name: "contactedvia"
+  is3:
+    fqn: "ol.is"
+    src: "probationattorney"
+    dst: "attorney"
+    entitySetName: "DemoIs"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "AttorneyPhoneNo"
+    name: "is3"
+  is4:
+    fqn: "ol.is"
+    src: "paroleattorney"
+    dst: "attorney"
+    entitySetName: "DemoIs"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "AttorneyPhoneNo"
+    name: "is4"
+  contactedvia2:
+    fqn: "ol.contactedvia"
+    src: "attorney"
+    dst: "attorneycontactinformation"
+    entitySetName: "DemoContactedvia2"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "AttorneyPhoneNo"
+    name: "contactedvia2"
+  representedby:
+    fqn: "ol.representedby"
+    src: "inmate"
+    dst: "attorney"
+    entitySetName: "DemoRepresentedby"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        transforms:
+          - !<transforms.ConcatTransform>
+            columns: ["AttorneyPhoneNo","SubjectIdentification"]
+    name: "representedby"
+
