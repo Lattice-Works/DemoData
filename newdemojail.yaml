@@ -83,21 +83,21 @@ entityDefinitions:
         transforms:
         - !<transforms.DateAsDateTimeTransform>
           pattern: ['yyyy-MM-dd']
-          timezone: "America/Los Angeles"
+          timezone: "America/Los_Angeles"
       ol.projectedreleasedate:
         type: "ol.projectedreleasedatetime"
         column: "SentenceEndDate"
         transforms:
         - !<transforms.DateAsDateTimeTransform>
           pattern: ['yyyy-MM-dd']
-          timezone: "America/Los Angeles"
+          timezone: "America/Los_Angeles"
       ol.releasedate:
         type: "ol.releasedatetime"
         column: "ReleaseDate"
         transforms:
         - !<transforms.DateAsDateTimeTransform>
           pattern: ['yyyy-MM-dd']
-          timezone: "America/Los Angeles"
+          timezone: "America/Los_Angeles"
       criminaljustice.releasetype:
         type: "criminaljustice.releasetype"
         column: "ReleaseType"
@@ -112,8 +112,6 @@ entityDefinitions:
       criminaljustice.timeserveddays:
         type: "criminaljustice.timeserveddays"
         column: "JailstayLength"
-        transforms:
-        - !<transforms.ParseIntTransform> {}
     name: "jailstaylength"    
   courtcase:
     fqn: "justice.case"
@@ -142,7 +140,7 @@ entityDefinitions:
         transforms:
         - !<transforms.DateAsDateTimeTransform>
           pattern: ['yyyy-MM-dd']
-          timezone: "America/Los Angeles"
+          timezone: "America/Los_Angeles"
       ol.type:
         type: "ol.type"
         column: "HearingType"
@@ -193,7 +191,7 @@ entityDefinitions:
         transforms:
         - !<transforms.DateAsDateTimeTransform>
           pattern: ['yyyy-MM-dd']
-          timezone: "America/Los Angeles"
+          timezone: "America/Los_Angeles"
     name: "sentence"
   sentenceterm:
     fqn: "ol.sentenceterm"
@@ -208,14 +206,14 @@ entityDefinitions:
         transforms:
         - !<transforms.DateAsDateTimeTransform>
           pattern: ['yyyy-MM-dd']
-          timezone: "America/Los Angeles"
+          timezone: "America/Los_Angeles"
       ol.projectedenddatetime:
         type: "ol.projectedenddatetime"
         column: "SentenceEndDate"
         transforms:
         - !<transforms.DateAsDateTimeTransform>
           pattern: ['yyyy-MM-dd']
-          timezone: "America/Los Angeles"
+          timezone: "America/Los_Angeles"
     name: "sentenceterm"
   parole:
     fqn: "ol.supervision"
@@ -223,17 +221,10 @@ entityDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["SubjectIdentification","HearingDate"]
+        column: "ParoleId"
       ol.supervisioninstituted:
         type: "ol.supervisioninstituted"
         column: "HearingDate"
-    conditions:
-    - !<conditions.BooleanRegexCondition>
-      column: "HearingType"
-      pattern: "Parole"
-      reverse: false
     name: "parole"
   probation:
     fqn: "ol.supervision"
@@ -241,26 +232,18 @@ entityDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["SubjectIdentification","HearingDate"]
+        column: 'ProbationId'
       ol.supervisioninstituted:
         type: "ol.supervisioninstituted"
         column: "HearingDate"
-    conditions:
-    - !<conditions.BooleanRegexCondition>
-      column: "HearingType"
-      pattern: "Probation"
-      reverse: false
     name: "probation"
-
   paroleofficer:
     fqn: "general.person"
     entitySetName: "DemoParoleOfficers"
     propertyDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
-        column: "OfficerPhoneNo"
+        column: "ParoleId"
       nc.PersonGivenName:
         type: "nc.PersonGivenName"
         column: "OfficerPhoneNo"
@@ -270,20 +253,14 @@ entityDefinitions:
       nc.PersonSurName:
         type: "nc.PersonSurName"
         column: "OfficerPhoneNo"
-    conditions:
-    - !<conditions.BooleanRegexCondition>
-      column: "HearingType"
-      pattern: "Parole"
-      reverse: false
     name: "paroleofficer"
-
   probationofficer:
     fqn: "general.person"
     entitySetName: "DemoProbationOfficers"
     propertyDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
-        column: "OfficerPhoneNo"
+        column: "ProbationId"
       nc.PersonGivenName:
         type: "nc.PersonGivenName"
         column: "OfficerPhoneNo"
@@ -293,20 +270,14 @@ entityDefinitions:
       nc.PersonSurName:
         type: "nc.PersonSurName"
         column: "OfficerPhoneNo"
-    conditions:
-    - !<conditions.BooleanRegexCondition>
-      column: "HearingType"
-      pattern: "Probation"
-      reverse: false
     name: "probationofficer"
-
   paroleattorney:
     fqn: "general.person"
     entitySetName: "DemoParoleAttorneys"
     propertyDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
-        column: "AttorneyPhoneNo"
+        column: "ParoleId"
       nc.PersonGivenName:
         type: "nc.PersonGivenName"
         column: "AttorneyFirstName"
@@ -316,20 +287,14 @@ entityDefinitions:
       nc.PersonSurName:
         type: "nc.PersonSurName"
         column: "AttorneyLastName"
-    conditions:
-    - !<conditions.BooleanRegexCondition>
-      column: "HearingType"
-      pattern: "Parole"
-      reverse: false
     name: "paroleattorney"
-
   probationattorney:
     fqn: "general.person"
     entitySetName: "DemoProbationAttorneys"
     propertyDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
-        column: "AttorneyPhoneNo"
+        column: "ProbationId"
       nc.PersonGivenName:
         type: "nc.PersonGivenName"
         column: "AttorneyFirstName"
@@ -339,11 +304,6 @@ entityDefinitions:
       nc.PersonSurName:
         type: "nc.PersonSurName"
         column: "AttorneyLastName"
-    conditions:
-    - !<conditions.BooleanRegexCondition>
-      column: "HearingType"
-      pattern: "Probation"
-      reverse: false
     name: "probationattorney"
 
   attorney:
@@ -418,9 +378,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["SubjectIdentification","BookId"]
+        column: "assn_subjectof"
     name: "subjectof"
   subjectof2:
     fqn: "ol.subjectof"
@@ -430,9 +388,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["SubjectIdentification","HearingDate"]
+        column: "assn_subjectof2"
     name: "subjectof2"
   subjectof3:
     fqn: "ol.subjectof"
@@ -442,9 +398,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["SubjectIdentification","HearingDate"]
+        column: "assn_subjectof3"
     name: "subjectof2"
   appearsin:
     fqn: "ol.appearsin"
@@ -454,9 +408,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["SubjectIdentification","DocketNo"]
+        column: "assn_appearsin"
     name: "appearsin"
   appearsin2:
     fqn: "ol.appearsin"
@@ -466,9 +418,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["SubjectIdentification","DocketNo"]
+        column: "assn_appearsin2"
     name: "appearsin2"
   reported:
     fqn: "ol.reported"
@@ -478,9 +428,7 @@ associationDefinitions:
     propertyDefinitions:
       general.id:
         type: "general.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["SubjectIdentification","SubjectIdentification"]
+        column: "assn_reported"
     name: "reported"
   reported2:
     fqn: "ol.reported"
@@ -490,9 +438,7 @@ associationDefinitions:
     propertyDefinitions:
       general.id:
         type: "general.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["SubjectIdentification","SubjectIdentification"]
+        column: "assn_reported2"
     name: "reported2"
   reported3:
     fqn: "ol.reported"
@@ -502,9 +448,7 @@ associationDefinitions:
     propertyDefinitions:
       general.id:
         type: "general.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["SubjectIdentification","SexOffender"]
+        column: "assn_reported3"
     name: "reported3"
   isregisteredsexoffenderin:
     fqn: "ol.isregisteredsexoffenderin"
@@ -514,9 +458,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["SubjectIdentification","SexOffenderCounty"]
+        column: "assn_isregisteredsexoffenderin"
     name: "isregisteredsexoffenderin"
   registeredin:
     fqn: "ol.registeredin"
@@ -526,9 +468,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["SexOffender","SexOffenderCounty"]
+        column: "assn_registeredin"
     name: "registeredin"
   resultsin:
     fqn: "ol.resultsin"
@@ -538,9 +478,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["SentenceId","BookId"]
+        column: "assn_resultsin"
     name: "resultsin"
   oflength2:
     fqn: "ol.oflength"
@@ -550,9 +488,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["BookId","JailstayLength"]
+        column: "assn_oflength2"
     name: "oflength2"
   partof:
     fqn: "ol.partof"
@@ -562,7 +498,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        column: "DocketNo"
+        column: "assn_partof"
     name: "partof"
   partof2:
     fqn: "ol.partof"
@@ -572,9 +508,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["BookId","DocketNo"]
+        column: "assn_partof2"
     name: "partof2"
   observedin:
     fqn: "ol.observedin"
@@ -584,9 +518,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["MentalHealthStatus","SubjectIdentification"]
+        column: "assn_observedin"
     name: "observedin"
   occurredduring:
     fqn: "ol.occurredduring"
@@ -596,9 +528,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["MentalHealthStatus","BookId"]
+        column: "assn_occurredduring"
     name: "occurredduring"
   oflength:
     fqn: "ol.oflength"
@@ -608,9 +538,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["SentenceId","SentenceId"]
+        column: "assn_oflength"
     name: "oflength"
   partof4:
     fqn: "ol.partof"
@@ -620,9 +548,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["SentenceId","BookId"]
+        column: "assn_partof4"
     name: "partof4"
   locatedat:
     fqn: "ol.locatedat"
@@ -632,9 +558,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["BookId","Facility"]
+        column: "assn_locatedat"
     name: "locatedat"
   sentencedwith:
     fqn: "ol.sentencedwith"
@@ -644,9 +568,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["SubjectIdentification","SentenceId"]
+        column: "assn_sentencedwith"
     name: "sentencedwith"
   resultsin2:
     fqn: "ol.resultsin"
@@ -656,11 +578,8 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["DocketNo","SentenceId"]
+        column: "assn_resultsin2"
     name: "resultsin2"
-
   is:
     fqn: "ol.is"
     src: "paroleofficer"
@@ -669,7 +588,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        column: "OfficerPhoneNo"
+        column: "assn_is"
     name: "is"
   is2:
     fqn: "ol.is"
@@ -679,7 +598,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        column: "OfficerPhoneNo"
+        column: "assn_is2"
     name: "is2"
   assignedto:
     fqn: "ol.assignedto"
@@ -689,9 +608,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["OfficerPhoneNo","SubjectIdentification"]
+        column: "assn_assignedto"
     name: "assignedto"
   assignedto1:
     fqn: "ol.assignedto"
@@ -701,9 +618,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["SubjectIdentification","HearingDate", "OfficerPhoneNo"]
+        column: "assn_assignedto1"
     name: "assignedto1"
   assignedto2:
     fqn: "ol.assignedto"
@@ -713,9 +628,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["SubjectIdentification","HearingDate", "OfficerPhoneNo"]
+        column: "assn_assignedto2"
     name: "assignedto2"
   contactedvia:
     fqn: "ol.contactedvia"
@@ -725,7 +638,7 @@ associationDefinitions:
     propertyDefinitions:
       general.id:
         type: "general.id"
-        column: "OfficerPhoneNo"
+        column: "assn_contactedvia"
     name: "contactedvia"
   is3:
     fqn: "ol.is"
@@ -735,7 +648,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        column: "AttorneyPhoneNo"
+        column: "assn_is3"
     name: "is3"
   is4:
     fqn: "ol.is"
@@ -745,7 +658,7 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        column: "AttorneyPhoneNo"
+        column: "assn_is4"
     name: "is4"
   contactedvia2:
     fqn: "ol.contactedvia"
@@ -755,7 +668,7 @@ associationDefinitions:
     propertyDefinitions:
       general.id:
         type: "general.id"
-        column: "AttorneyPhoneNo"
+        column: "assn_contactedvia2"
     name: "contactedvia2"
   representedby:
     fqn: "ol.representedby"
@@ -765,8 +678,6 @@ associationDefinitions:
     propertyDefinitions:
       ol.id:
         type: "ol.id"
-        transforms:
-          - !<transforms.ConcatTransform>
-            columns: ["AttorneyPhoneNo","SubjectIdentification"]
+        column: "assn_representedby"
     name: "representedby"
 
