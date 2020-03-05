@@ -50,7 +50,7 @@ entityDefinitions:
     name: "persondetails"
   education:
     fqn: "ol.education"
-    entitySetName: "DemoEducation"
+    entitySetName: "DemoInmateEducation"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -80,24 +80,15 @@ entityDefinitions:
       incident.startdatetime:
         type: "incident.startdatetime"
         column: "SentenceStartDate"
-        transforms:
-        - !<transforms.DateAsDateTimeTransform>
-          pattern: ['yyyy-MM-dd']
-          timezone: "America/Los_Angeles"
-      ol.projectedreleasedate:
+        
+      ol.projectedreleasedatetime:
         type: "ol.projectedreleasedatetime"
         column: "SentenceEndDate"
-        transforms:
-        - !<transforms.DateAsDateTimeTransform>
-          pattern: ['yyyy-MM-dd']
-          timezone: "America/Los_Angeles"
-      ol.releasedate:
+        
+      ol.releasedatetime:
         type: "ol.releasedatetime"
         column: "ReleaseDate"
-        transforms:
-        - !<transforms.DateAsDateTimeTransform>
-          pattern: ['yyyy-MM-dd']
-          timezone: "America/Los_Angeles"
+        
       criminaljustice.releasetype:
         type: "criminaljustice.releasetype"
         column: "ReleaseType"
@@ -138,9 +129,7 @@ entityDefinitions:
         type: "general.datetime"
         column: "HearingDate"
         transforms:
-        - !<transforms.DateAsDateTimeTransform>
-          pattern: ['yyyy-MM-dd']
-          timezone: "America/Los_Angeles"
+        
       ol.type:
         type: "ol.type"
         column: "HearingType"
@@ -189,9 +178,7 @@ entityDefinitions:
         type: "datetime.received"
         column: "SentenceDate"
         transforms:
-        - !<transforms.DateAsDateTimeTransform>
-          pattern: ['yyyy-MM-dd']
-          timezone: "America/Los_Angeles"
+        
     name: "sentence"
   sentenceterm:
     fqn: "ol.sentenceterm"
@@ -204,16 +191,12 @@ entityDefinitions:
         type: "ol.datetimestart"
         column: "SentenceStartDate"
         transforms:
-        - !<transforms.DateAsDateTimeTransform>
-          pattern: ['yyyy-MM-dd']
-          timezone: "America/Los_Angeles"
+        
       ol.projectedenddatetime:
         type: "ol.projectedenddatetime"
         column: "SentenceEndDate"
         transforms:
-        - !<transforms.DateAsDateTimeTransform>
-          pattern: ['yyyy-MM-dd']
-          timezone: "America/Los_Angeles"
+        
     name: "sentenceterm"
   parole:
     fqn: "ol.supervision"
@@ -239,7 +222,7 @@ entityDefinitions:
     name: "probation"
   paroleofficer:
     fqn: "general.person"
-    entitySetName: "DemoParoleOfficers"
+    entitySetName: "DemoOfficerPeople"
     propertyDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
@@ -256,7 +239,7 @@ entityDefinitions:
     name: "paroleofficer"
   probationofficer:
     fqn: "general.person"
-    entitySetName: "DemoProbationOfficers"
+    entitySetName: "DemoOfficerPeople"
     propertyDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
@@ -273,7 +256,7 @@ entityDefinitions:
     name: "probationofficer"
   paroleattorney:
     fqn: "general.person"
-    entitySetName: "DemoParoleAttorneys"
+    entitySetName: "DemoAttorneyPeople"
     propertyDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
@@ -290,7 +273,7 @@ entityDefinitions:
     name: "paroleattorney"
   probationattorney:
     fqn: "general.person"
-    entitySetName: "DemoProbationAttorneys"
+    entitySetName: "DemoAttorneyPeople"
     propertyDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
@@ -313,9 +296,6 @@ entityDefinitions:
       ol.id:
         type: "ol.id"
         column: "AttorneyPhoneNo"
-      ol.type:
-        type: "ol.type"
-        column: "HearingType"
     name: "attorney"
   
   officer:
@@ -325,9 +305,6 @@ entityDefinitions:
       ol.id:
         type: "ol.id"
         column: "OfficerPhoneNo"
-      ol.category:
-        type: "ol.category"
-        column: "HearingType"
     name: "officer"
 
   officercontactinformation:
@@ -368,7 +345,7 @@ associationDefinitions:
     fqn: "ol.subjectof"
     src: "inmate"
     dst: "jailstay"
-    entitySetName: "DemoSubjectOf"
+    entitySetName: "DemoJailSubjectOf"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -378,7 +355,7 @@ associationDefinitions:
     fqn: "ol.subjectof"
     src: "inmate"
     dst: "parole"
-    entitySetName: "DemoSubjectOf"
+    entitySetName: "DemoJailSubjectOf"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -388,17 +365,17 @@ associationDefinitions:
     fqn: "ol.subjectof"
     src: "inmate"
     dst: "probation"
-    entitySetName: "DemoSubjectOf"
+    entitySetName: "DemoJailSubjectOf"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
         column: "assn_subjectof3"
-    name: "subjectof2"
+    name: "subjectof3"
   appearsin:
     fqn: "ol.appearsin"
     src: "inmate"
     dst: "courtcase"
-    entitySetName: "DemoAppearsIn"
+    entitySetName: "DemoJailAppearsIn"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -408,7 +385,7 @@ associationDefinitions:
     fqn: "ol.appearsin"
     src: "inmate"
     dst: "hearing"
-    entitySetName: "DemoAppearsIn"
+    entitySetName: "DemoJailAppearsIn"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -418,7 +395,7 @@ associationDefinitions:
     fqn: "ol.reported"
     src: "inmate"
     dst: "persondetails"
-    entitySetName: "DemoReported"
+    entitySetName: "DemoJailReported"
     propertyDefinitions:
       general.id:
         type: "general.id"
@@ -428,7 +405,7 @@ associationDefinitions:
     fqn: "ol.reported"
     src: "inmate"
     dst: "education"
-    entitySetName: "DemoReported"
+    entitySetName: "DemoJailReported"
     propertyDefinitions:
       general.id:
         type: "general.id"
@@ -438,7 +415,7 @@ associationDefinitions:
     fqn: "ol.reported"
     src: "inmate"
     dst: "sexoffenderstatus"
-    entitySetName: "DemoReported"
+    entitySetName: "DemoJailReported"
     propertyDefinitions:
       general.id:
         type: "general.id"
@@ -448,7 +425,7 @@ associationDefinitions:
     fqn: "ol.isregisteredsexoffenderin"
     src: "inmate"
     dst: "county"
-    entitySetName: "DemoIsRegisteredSexOffenderIn"
+    entitySetName: "DemoJailIsRegisteredSexOffenderIn"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -458,7 +435,7 @@ associationDefinitions:
     fqn: "ol.registeredin"
     src: "sexoffenderstatus"
     dst: "county"
-    entitySetName: "DemoRegisteredIn"
+    entitySetName: "DemoJailRegisteredIn"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -468,7 +445,7 @@ associationDefinitions:
     fqn: "ol.resultsin"
     src: "sentence"
     dst: "jailstay"
-    entitySetName: "DemoResultsIn"
+    entitySetName: "DemoJailResultsIn"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -488,7 +465,7 @@ associationDefinitions:
     fqn: "ol.partof"
     src: "hearing"
     dst: "courtcase"
-    entitySetName: "DemoPartOf"
+    entitySetName: "DemoJailPartOf"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -498,7 +475,7 @@ associationDefinitions:
     fqn: "ol.partof"
     src: "jailstay"
     dst: "courtcase"
-    entitySetName: "DemoPartOf"
+    entitySetName: "DemoJailPartOf"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -508,7 +485,7 @@ associationDefinitions:
     fqn: "ol.observedin"
     src: "mentalhealthstatus"
     dst: "inmate"
-    entitySetName: "DemoObservedIn"
+    entitySetName: "DemoJailObservedIn"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -518,7 +495,7 @@ associationDefinitions:
     fqn: "ol.occurredduring"
     src: "mentalhealthstatus"
     dst: "jailstay"
-    entitySetName: "DemoOccurredDuring"
+    entitySetName: "DemoJailOccurredDuring"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -531,7 +508,7 @@ associationDefinitions:
     fqn: "ol.oflength"
     dst: "sentenceterm"
     src: "sentence"
-    entitySetName: "DemoOfLength"
+    entitySetName: "DemoJailOfLength"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -541,7 +518,7 @@ associationDefinitions:
     fqn: "ol.partof"
     dst: "jailstay"
     src: "sentenceterm"
-    entitySetName: "DemoPartOf"
+    entitySetName: "DemoJailPartOf"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -551,7 +528,7 @@ associationDefinitions:
     fqn: "ol.locatedat"
     src: "jailstay"
     dst: "facility"
-    entitySetName: "DemoLocatedAt"
+    entitySetName: "DemoJailLocatedAt"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -561,7 +538,7 @@ associationDefinitions:
     fqn: "ol.sentencedwith"
     dst: "sentence"
     src: "inmate"
-    entitySetName: "DemoSentencedWith"
+    entitySetName: "DemoJailSentencedWith"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -571,7 +548,7 @@ associationDefinitions:
     fqn: "ol.resultsin"
     src: "courtcase"
     dst: "sentence"
-    entitySetName: "DemoResultsIn"
+    entitySetName: "DemoJailResultsIn"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -581,27 +558,27 @@ associationDefinitions:
     fqn: "ol.is"
     src: "paroleofficer"
     dst: "officer"
-    entitySetName: "DemoIs"
+    entitySetName: "DemoJailIs"
     propertyDefinitions:
-      ol.id:
-        type: "ol.id"
+      general.stringid:
+        type: "general.stringid"
         column: "assn_is"
     name: "is"
   is2:
     fqn: "ol.is"
     src: "probationofficer"
     dst: "officer"
-    entitySetName: "DemoIs"
+    entitySetName: "DemoJailIs"
     propertyDefinitions:
-      ol.id:
-        type: "ol.id"
+      general.stringid:
+        type: "general.stringid"
         column: "assn_is2"
     name: "is2"
   assignedto:
     fqn: "ol.assignedto"
     src: "officer"
     dst: "inmate"
-    entitySetName: "DemoAssignedTo"
+    entitySetName: "DemoJailAssignedTo"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -611,7 +588,7 @@ associationDefinitions:
     fqn: "ol.assignedto"
     src: "officer"
     dst: "parole"
-    entitySetName: "DemoAssignedTo"
+    entitySetName: "DemoJailAssignedTo"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -621,7 +598,7 @@ associationDefinitions:
     fqn: "ol.assignedto"
     src: "officer"
     dst: "probation"
-    entitySetName: "DemoAssignedTo"
+    entitySetName: "DemoJailAssignedTo"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -631,7 +608,7 @@ associationDefinitions:
     fqn: "ol.contactedvia"
     src: "officer"
     dst: "officercontactinformation"
-    entitySetName: "DemoContactedVia"
+    entitySetName: "DemoJailContactedVia"
     propertyDefinitions:
       general.id:
         type: "general.id"
@@ -641,27 +618,27 @@ associationDefinitions:
     fqn: "ol.is"
     src: "probationattorney"
     dst: "attorney"
-    entitySetName: "DemoIs"
+    entitySetName: "DemoJailIs"
     propertyDefinitions:
-      ol.id:
-        type: "ol.id"
+      general.stringid:
+        type: "general.stringid"
         column: "assn_is3"
     name: "is3"
   is4:
     fqn: "ol.is"
     src: "paroleattorney"
     dst: "attorney"
-    entitySetName: "DemoIs"
+    entitySetName: "DemoJailIs"
     propertyDefinitions:
-      ol.id:
-        type: "ol.id"
+      general.stringid:
+        type: "general.stringid"
         column: "assn_is4"
     name: "is4"
   contactedvia2:
     fqn: "ol.contactedvia"
     src: "attorney"
     dst: "attorneycontactinformation"
-    entitySetName: "DemoContactedVia"
+    entitySetName: "DemoJailContactedVia"
     propertyDefinitions:
       general.id:
         type: "general.id"
@@ -671,7 +648,7 @@ associationDefinitions:
     fqn: "ol.representedby"
     src: "inmate"
     dst: "attorney"
-    entitySetName: "DemoRepresentedBy"
+    entitySetName: "DemoJailRepresentedBy"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
