@@ -1,0 +1,286 @@
+entityDefinitions:
+  person:
+    fqn: "general.person"
+    entitySetName: "GuidesDemoPeople"
+    propertyDefinitions:
+      nc.SubjectIdentification:
+        type: "nc.SubjectIdentification"
+        column: "SubjectIdentification"
+      nc.PersonGivenName:
+        type: "nc.PersonGivenName"
+        column: "firstName"
+      nc.PersonMiddleName:
+        type: "nc.PersonMiddleName"
+        column: "middleName"
+      nc.PersonSurName:
+        type: "nc.PersonSurName"
+        column: "lastName"
+      nc.PersonRace:
+        type: "nc.PersonRace"
+        column: "race"
+      nc.PersonEthnicity:
+        type: "nc.PersonEthnicity"
+        column: "ethnicity"
+      nc.SSN:
+        type: "nc.SSN"
+        column: "ssn"
+      nc.PersonSex:
+        type: "nc.PersonSex"
+        column: "sex"
+      nc.PersonBirthDate:
+        type: "nc.PersonBirthDate"
+        column: "dob"
+    name: "person"
+
+  case:
+    fqn: "justice.case"
+    entitySetName: "GuidesDemoCases"
+    propertyDefinitions:
+      j.CaseNumberText:
+        type: "j.CaseNumberText"
+        column: "CaseID"
+      justice.courtcasenumber:
+        type: "justice.courtcasenumber"
+        column: "CaseID"
+    name: "case"
+
+  stayawaylocation:
+    fqn: "ol.location"
+    entitySetName: "GuidesDemoStayAways"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "Coordinates"
+      location.latitude:
+        type: "location.latitude"
+        column: "Lat"
+      location.longitude:
+        type: "location.longitude"
+        column: "Long"
+      location.address:
+        type: "location.address"
+        column: "Address"
+      location.state:
+        type: "location.state"
+        column: "State"
+      location.city:
+        type: "location.city"
+        column: "City"
+      criminaljustice.beatsector:
+        type: "criminaljustice.beatsector"
+        column: "Beat"
+    name: "stayawaylocation"
+
+  serviceofprocess:
+    fqn: "ol.serviceofprocess"
+    entitySetName: "GuidesDemoServiceOfProcess"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "StayAwayOrderID"
+      ol.notes:
+        type: "ol.notes"
+        column: "StayAwayRadiusStr"
+    name: "serviceofprocess"
+
+  probation:
+    fqn: "ol.supervision"
+    entitySetName: "GuidesDemoProbation"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "ProbationID"
+      ol.recognizedstartdate:
+        type: "ol.recognizedstartdate"
+        column: "ProbationStart"
+      ol.recognizedenddate:
+        type: "ol.recognizedenddate"
+        column: "ProbationEnd"
+    name: "probation"
+
+    #  warrant:
+    #    fqn: "ol.warrant"
+    #    entitySetName: "GuidesDemoWarrant"
+    #    propertyDefinitions:
+    #      ol.id:
+    #        type: "ol.id"
+    #        column: "Warrants"
+    #      ol.warrantnumber:
+    #        type: "ol.warrantnumber"
+    #        column: "Warrants"
+    #    name: "warrant"
+
+  driverslicense:
+    fqn: "ol.identification"
+    entitySetName: "GuidesDemoDriversLicense"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "DLNo"
+      ol.stringnumber:
+        type: "ol.stringnumber"
+        column: "DLNo"
+    name: "driverslicense"
+
+  mugshot:
+    fqn: "ol.image"
+    entitySetName: "GuidesDemoMugshots"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "ImageID"
+      # ol.imagedata:
+      #   type: "ol.imagedata"
+      #   column: "Image"
+    name: "mugshot"
+
+  policebeat:
+    fqn: "ol.zone"
+    entitySetName: "GuidesDemoBeats"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "Beat"
+      ol.code:
+        type: "ol.code"
+        column: "Beat"
+    name: "policebeat"
+
+  radius:
+    fqn: "ol.distanceinterval"
+    entitySetName: "GuidesDemoRadius"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "StayAwayRadius"
+      ol.value:
+        type: "ol.value"
+        column: "StayAwayRadius"
+      ol.units:
+        type: "ol.units"
+        column: "StayAwayUnits"
+    name: "radius"
+
+  councildistrict:
+    fqn: "ol.location"
+    entitySetName: "GuidesDemoCouncilDistricts"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "CouncilDistrict"
+      location.name:
+        type: "location.name"
+        column: "CouncilDistrict"
+    name: "councildistrict"
+
+associationDefinitions:
+  appearsin:
+    fqn: "ol.appearsin"
+    entitySetName: "GuidesDemoAppearsIn"
+    src: "person"
+    dst: "case"
+    propertyDefinitions:
+      general.stringid:
+        type: "general.stringid"
+        column: "assn_appearsin"
+    name: "appearsin"
+
+  ispictureof:
+    fqn: "ol.ispictureof"
+    entitySetName: "GuidesDemoIsPictureOf"
+    src: "mugshot"
+    dst: "person"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "assn_ispictureof"
+    name: "ispictureof"
+
+  filedfor:
+    fqn: "ol.filedfor"
+    entitySetName: "GuidesDemoFiledFor"
+    src: "serviceofprocess"
+    dst: "stayawaylocation"
+    propertyDefinitions:     
+      ol.id:
+        type: "ol.id"
+        column: "assn_filedfor"
+    name: "filedfor"
+
+  filedfor2:
+    fqn: "ol.filedfor"
+    entitySetName: "GuidesDemoFiledFor"
+    src: "serviceofprocess"
+    dst: "case"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "assn_filedfor2"
+    name: "filedfor2"
+
+  locatedat:
+    fqn: "ol.locatedat"
+    entitySetName: "GuidesDemoLocatedAt"
+    src: "stayawaylocation"
+    dst: "policebeat"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "assn_locatedat"
+    name: "locatedat"
+
+  locatedat2:
+    fqn: "ol.locatedat"
+    entitySetName: "GuidesDemoLocatedAt"
+    src: "case"
+    dst: "councildistrict"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "assn_locatedat2"
+    name: "locatedat2"
+
+  subjectof:
+    fqn: "ol.subjectof"
+    entitySetName: "GuidesDemoSubjectOf"
+    src: "person"
+    dst: "probation"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "assn_subjectof"
+    name: "subjectof"
+
+  reported:
+    fqn: "ol.reported"
+    entitySetName: "GuidesDemoReported"
+    src: "person"
+    dst: "driverslicense"
+    propertyDefinitions:
+      general.id:
+        type: "general.id"
+        column: "assn_reported"
+    name: "reported"
+
+    #  servedwith:
+    #    fqn: "ol.servedwith"
+    #    entitySetName: "GuidesDemoServedWith"
+    #    src: "person"
+    #    dst: "warrant"
+    #    propertyDefinitions:
+    #      ol.id:
+    #        type: "ol.id"
+    #        column: "assn_servedwith"
+    #    name: "servedwith"
+
+  registeredfor:
+    fqn: "general.registeredfor"
+    entitySetName: "GuidesDemoRegisteredFor"
+    src: "radius"
+    dst: "serviceofprocess"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "assn_registeredfor"
+    name: "registeredfor"
+
