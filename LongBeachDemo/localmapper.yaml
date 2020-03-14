@@ -1,6 +1,0 @@
-hikariConfigs:
-  test:
-    jdbcUrl: jdbc:postgresql://localhost:5432/test
-    username: username 
-    password: password
-    maximumPoolSize: 1
