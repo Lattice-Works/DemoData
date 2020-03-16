@@ -51,6 +51,9 @@ entityDefinitions:
       general.id:
         type: "general.id"
         column: "Coordinates"
+      ol.locationcoordinates:
+      	type: "ol.locationcoordinates"
+      	column: "Coordinates"
       location.latitude:
         type: "location.latitude"
         column: "Lat"
@@ -262,16 +265,16 @@ associationDefinitions:
         column: "assn_reported"
     name: "reported"
 
-    #  servedwith:
-    #    fqn: "ol.servedwith"
-    #    entitySetName: "GuidesDemoServedWith"
-    #    src: "person"
-    #    dst: "warrant"
-    #    propertyDefinitions:
-    #      ol.id:
-    #        type: "ol.id"
-    #        column: "assn_servedwith"
-    #    name: "servedwith"
+	servedwith:
+	 fqn: "ol.servedwith"
+	 entitySetName: "GuidesDemoServedWith"
+	 src: "person"
+	 dst: "serviceofprocess"
+	 propertyDefinitions:
+	   ol.id:
+	     type: "ol.id"
+	     column: "assn_servedwith"
+	 name: "servedwith"
 
   registeredfor:
     fqn: "general.registeredfor"
@@ -283,4 +286,3 @@ associationDefinitions:
         type: "ol.id"
         column: "assn_registeredfor"
     name: "registeredfor"
-
