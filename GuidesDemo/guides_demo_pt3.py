@@ -11,41 +11,12 @@ from shapely.geometry import Point, Polygon
 from geopy.geocoders import Nominatim
 locator = Nominatim(user_agent="myGeocoder")
 
-# Get schema of flight
 
-# Make polygons for different beats
-
-beat1 = Polygon([(37.6033406, -122.3786768),
-(37.5878350, -122.4109677),
-(37.5701493, -122.3965398),
-(37.5587194, -122.3797073),
-(37.5859306, -122.3336756),
-(37.5902835, -122.3597832),
-(37.6033406, -122.3786768)])
-
-beat2 = Polygon([(37.5859306, -122.3336756),
-(37.5807729, -122.3232582),
-(37.5839018, -122.3177618),
-(37.5723379, -122.2983529),
-(37.5080918, -122.3366555),
-(37.5587194, -122.3797073),
-(37.5859306, -122.3336756)])
-
-beat3 = Polygon([(37.5080918, -122.3366555),
-(37.5723379, -122.2983529),
-(37.5698889, -122.2626490),
-(37.5600919, -122.2489082),
-(37.5397113, -122.2542144),
-(37.5016914, -122.2947682),
-(37.5080918, -122.3366555)])
-
-beat4 = Polygon([(37.5016914, -122.2947682),
-(37.5397113, -122.2542144),
-(37.5486604, -122.2434810),
-(37.5419912, -122.2299119),
-(37.5120407, -122.2542643),
-(37.4854836, -122.2781174),
-(37.5016914, -122.2947682)])
+long_beach_beat = Polygon([(33.765006, -118.203539),
+(33.819782, -118.204589),
+(33.804562, -118.144767),
+(33.756065, -118.139132),
+(33.765006, -118.203539)])
 
 # Util functions
 
@@ -81,14 +52,6 @@ def random_date_up_to_x_days_after_previous_date(date, days):
 
 # Dicts for creating classes
 
-providers = {
-    'Joyland Healthcare': 0.05 ,
-    'Peaceful Play': 0.25,
-    'Sharing Center': 0.15,
-    'Main St. Group Home': 0.25,
-    'Saint Marys': 0.15,
-    'Road Home': 0.15
-}
 
 council_districts = {
     'Santa Clara': 0.2,
@@ -97,18 +60,12 @@ council_districts = {
 }
 
 stay_away_dict = {
-    50: 0.4,
-    100: 0.3,
-    200: 0.2,
-    500: 0.1
+    100: 0.4,
+    200: 0.3,
+    300: 0.2,
+    400: 0.1
 }
 
-beat_dict = {
-    'beat1': 0.2,
-    'beat2': 0.3,
-    'beat3': 0.3,
-    'beat4': 0.2
-}
 
 #Classes which generate data
 
@@ -131,18 +88,13 @@ class GuidesPerson():
 
         today = datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d')
 
-        probation = np.random.choice(['Y','N'], p = [0.5,0.5])
+        probation = 'Y'
 
         if probation == 'Y':
             self.inmate['ProbationID'] = str(uuid.uuid1())
             self.inmate['ProbationStart'] = random_date_in_date_range('2015-01-01', today)
             self.inmate['ProbationEnd'] = random_date_up_to_x_days_after_previous_date(self.inmate['ProbationStart'], 1000)
 
-
-        provider = np.random.choice(['Y','N'], p = [0.5,0.5])
-
-        if provider == 'Y':
-            self.inmate['Provider'] = np.random.choice(list(providers.keys()), p = list(providers.values()))
 
     @property
     def __dict__(self):
@@ -152,9 +104,10 @@ class Case():
     '''
     Generate Cases and assign to Council Districts (CaseID, CouncilDistrict) and randomly distribute them to people
     '''
-    def __init__(self, key):
+    def __init__(self, sid):
         
         self.case = {}
+        self.case['SubjectIdentification'] = sid
         self.case['CaseID'] = str(uuid.uuid1())
         self.case['CouncilDistrict'] = np.random.choice(list(council_districts.keys()), p = list(council_districts.values()))
         
@@ -167,20 +120,21 @@ class ServiceOfProcess():
     Generate serviceofprocess (StayAwayOrderID,  StayAwayRadius,StayAwayRadiusStr, StayAwayUnits)
     Include Location and Beat in generation of serviceofprocess (Coordinates, Lat, Long, Address, City, State)
     '''
-    def __init__(self, key):
+    def __init__(self, sid):
         
         self.serviceofprocess = {}
+        self.serviceofprocess['SubjectIdentification'] = sid
         self.serviceofprocess['StayAwayOrderID'] = str(uuid.uuid1())
         self.serviceofprocess['StayAwayRadius'] = np.random.choice(list(stay_away_dict.keys()), p = list(stay_away_dict.values()))
         sar = self.serviceofprocess['StayAwayRadius']
         self.serviceofprocess['StayAwayUnits'] = "Yards"
         
         
-        self.serviceofprocess['Beat'] = np.random.choice(list(beat_dict.keys()), p = list(beat_dict.values()))
+        self.serviceofprocess['Beat'] = 'Long Beach'
         
         self.beat = self.serviceofprocess['Beat']
         
-        self.serviceofprocess['Coordinates'] = generate_random_lat_long(1, eval(self.beat))[0]
+        self.serviceofprocess['Coordinates'] = generate_random_lat_long(1, long_beach_beat)[0]
         self.serviceofprocess['Lat'] = self.serviceofprocess['Coordinates'][0]
         self.serviceofprocess['Long'] = self.serviceofprocess['Coordinates'][1]
         
@@ -245,33 +199,36 @@ def make_df(Enttype, keylist):
 
     return pd.DataFrame(dictlist).astype('object')
 
-def join_rows_probablistically(df1,df2,n,join_p):
-    df1_copy = df1.copy()
-    df2_copy = df2.copy()
-    dictlist = []
-    for i in range(n):
-        has_case = np.random.choice(['Y','N'], p = [join_p,1-join_p])
-        df1_sample = df1_copy.sample().to_dict('record')[0]
-        df2_sample = df2_copy.sample().to_dict('record')[0]
+# def join_rows_probablistically(df1,df2,n,join_p):
+#     df1_copy = df1.copy()
+#     df2_copy = df2.copy()
+#     dictlist = []
+#     for i in range(n):
+#         has_case = 'Y'
+#         df1_sample = df1_copy.sample().to_dict('record')[0]
+#         df2_sample = df2_copy.sample().to_dict('record')[0]
         
-        if has_case == 'Y':
-            result = {**df1_sample,**df2_sample}
+#         if has_case == 'Y':
+#             result = {**df1_sample,**df2_sample}
 
             
-        else:
-            result = {**df1_sample}
+#         else:
+#             result = {**df1_sample}
             
-        dictlist.append(result)
-    return pd.DataFrame(dictlist).astype('object')
+#         dictlist.append(result)
+#     return pd.DataFrame(dictlist).astype('object')
 
 # Make and join all the data
 
-lbpdf = make_df(GuidesPerson, list(range(200)))
-case_df = make_df(Case, list(range(200)))
-sop_df = make_df(ServiceOfProcess, list(range(30)))
+lbpdf = make_df(GuidesPerson, list(range(500)))
+case_df = make_df(Case, list(lbpdf['SubjectIdentification']))
+sop_df = make_df(ServiceOfProcess, list(lbpdf['SubjectIdentification']))
 
-case_sop_df = join_rows_probablistically(case_df, sop_df, 200, 0.5)
-full = join_rows_probablistically(lbpdf, case_sop_df, 200, 0.8)
+# case_sop_df = join_rows_probablistically(case_df, sop_df, 2000, 1)
+# full = join_rows_probablistically(lbpdf, case_sop_df, 500, 1)
+
+half = lbpdf.set_index('SubjectIdentification').join(case_df.set_index('SubjectIdentification'))
+full = half.join(sop_df.set_index('SubjectIdentification')).reset_index()
 
 date_columns = ['dob']
 
@@ -310,4 +267,4 @@ guides_fd = fl.schema
 make_assn_cols(full, guides_fd)
 
 engine = create_engine('postgresql://nicholas@localhost:5432/test')
-full.to_sql("guides_demo", engine)
+full.to_sql("guides_demo3", engine)

@@ -15,37 +15,44 @@ locator = Nominatim(user_agent="myGeocoder")
 
 # Make polygons for different beats
 
-beat1 = Polygon([(37.6033406, -122.3786768),
-(37.5878350, -122.4109677),
-(37.5701493, -122.3965398),
-(37.5587194, -122.3797073),
-(37.5859306, -122.3336756),
-(37.5902835, -122.3597832),
-(37.6033406, -122.3786768)])
+# beat1 = Polygon([(37.6033406, -122.3786768),
+# (37.5878350, -122.4109677),
+# (37.5701493, -122.3965398),
+# (37.5587194, -122.3797073),
+# (37.5859306, -122.3336756),
+# (37.5902835, -122.3597832),
+# (37.6033406, -122.3786768)])
 
-beat2 = Polygon([(37.5859306, -122.3336756),
-(37.5807729, -122.3232582),
-(37.5839018, -122.3177618),
-(37.5723379, -122.2983529),
-(37.5080918, -122.3366555),
-(37.5587194, -122.3797073),
-(37.5859306, -122.3336756)])
+# beat2 = Polygon([(37.5859306, -122.3336756),
+# (37.5807729, -122.3232582),
+# (37.5839018, -122.3177618),
+# (37.5723379, -122.2983529),
+# (37.5080918, -122.3366555),
+# (37.5587194, -122.3797073),
+# (37.5859306, -122.3336756)])
 
-beat3 = Polygon([(37.5080918, -122.3366555),
-(37.5723379, -122.2983529),
-(37.5698889, -122.2626490),
-(37.5600919, -122.2489082),
-(37.5397113, -122.2542144),
-(37.5016914, -122.2947682),
-(37.5080918, -122.3366555)])
+# beat3 = Polygon([(37.5080918, -122.3366555),
+# (37.5723379, -122.2983529),
+# (37.5698889, -122.2626490),
+# (37.5600919, -122.2489082),
+# (37.5397113, -122.2542144),
+# (37.5016914, -122.2947682),
+# (37.5080918, -122.3366555)])
 
-beat4 = Polygon([(37.5016914, -122.2947682),
-(37.5397113, -122.2542144),
-(37.5486604, -122.2434810),
-(37.5419912, -122.2299119),
-(37.5120407, -122.2542643),
+# beat4 = Polygon([(37.5016914, -122.2947682),
+# (37.5397113, -122.2542144),
+# (37.5486604, -122.2434810),
+# (37.5419912, -122.2299119),
+# (37.5120407, -122.2542643),
+# (37.4854836, -122.2781174),
+# (37.5016914, -122.2947682)])
+
+redwood_city_beat = Polygon([(37.5120407, -122.2542643),
 (37.4854836, -122.2781174),
-(37.5016914, -122.2947682)])
+(37.4371385, -122.2425585),
+(37.4862680, -122.2011200),
+(37.4980660, -122.2386110),
+(37.5120407, -122.2542643)])
 
 # Util functions
 
@@ -131,7 +138,7 @@ class GuidesPerson():
 
         today = datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d')
 
-        probation = np.random.choice(['Y','N'], p = [0.5,0.5])
+        probation = 'Y'
 
         if probation == 'Y':
             self.inmate['ProbationID'] = str(uuid.uuid1())
@@ -139,7 +146,7 @@ class GuidesPerson():
             self.inmate['ProbationEnd'] = random_date_up_to_x_days_after_previous_date(self.inmate['ProbationStart'], 1000)
 
 
-        provider = np.random.choice(['Y','N'], p = [0.5,0.5])
+        provider = 'Y'
 
         if provider == 'Y':
             self.inmate['Provider'] = np.random.choice(list(providers.keys()), p = list(providers.values()))
@@ -176,11 +183,11 @@ class ServiceOfProcess():
         self.serviceofprocess['StayAwayUnits'] = "Yards"
         
         
-        self.serviceofprocess['Beat'] = np.random.choice(list(beat_dict.keys()), p = list(beat_dict.values()))
+        self.serviceofprocess['Beat'] = 'Redwood City'
         
         self.beat = self.serviceofprocess['Beat']
         
-        self.serviceofprocess['Coordinates'] = generate_random_lat_long(1, eval(self.beat))[0]
+        self.serviceofprocess['Coordinates'] = generate_random_lat_long(1, redwood_city_beat)[0]
         self.serviceofprocess['Lat'] = self.serviceofprocess['Coordinates'][0]
         self.serviceofprocess['Long'] = self.serviceofprocess['Coordinates'][1]
         
@@ -266,12 +273,12 @@ def join_rows_probablistically(df1,df2,n,join_p):
 
 # Make and join all the data
 
-lbpdf = make_df(GuidesPerson, list(range(200)))
-case_df = make_df(Case, list(range(200)))
-sop_df = make_df(ServiceOfProcess, list(range(30)))
+lbpdf = make_df(GuidesPerson, list(range(500)))
+case_df = make_df(Case, list(range(400)))
+sop_df = make_df(ServiceOfProcess, list(range(300)))
 
-case_sop_df = join_rows_probablistically(case_df, sop_df, 200, 0.5)
-full = join_rows_probablistically(lbpdf, case_sop_df, 200, 0.8)
+case_sop_df = join_rows_probablistically(case_df, sop_df, 500, 1)
+full = join_rows_probablistically(lbpdf, case_sop_df, 500, 1)
 
 date_columns = ['dob']
 
@@ -310,4 +317,4 @@ guides_fd = fl.schema
 make_assn_cols(full, guides_fd)
 
 engine = create_engine('postgresql://nicholas@localhost:5432/test')
-full.to_sql("guides_demo", engine)
+full.to_sql("guides_demo2", engine)

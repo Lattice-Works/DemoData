@@ -1,7 +1,13 @@
+# The following entity sets I am creating new specific entity sets for because  they are not in use by the app yet
+# Cases, Drivers Licenses, and Council Districts
+#
+# The rest of the entity sets I am integrating to exist already and are based on solomon's guidance
+
+
 entityDefinitions:
   person:
     fqn: "general.person"
-    entitySetName: "GuidesDemoPeople"
+    entitySetName: "OpenLattice Demo Org -_app_people"
     propertyDefinitions:
       nc.SubjectIdentification:
         type: "nc.SubjectIdentification"
@@ -46,22 +52,22 @@ entityDefinitions:
 
   stayawaylocation:
     fqn: "ol.location"
-    entitySetName: "GuidesDemoStayAways"
+    entitySetName: "openlatticedemoorg_app_stayawaylocation"
     propertyDefinitions:
       general.id:
         type: "general.id"
         column: "Coordinates"
       ol.locationcoordinates:
-      	type: "ol.locationcoordinates"
-      	column: "Coordinates"
+        type: "ol.locationcoordinates"
+        column: "Coordinates"
       location.latitude:
         type: "location.latitude"
         column: "Lat"
       location.longitude:
         type: "location.longitude"
         column: "Long"
-      location.address:
-        type: "location.address"
+      location.street:
+        type: "location.street"
         column: "Address"
       location.state:
         type: "location.state"
@@ -76,19 +82,16 @@ entityDefinitions:
 
   serviceofprocess:
     fqn: "ol.serviceofprocess"
-    entitySetName: "GuidesDemoServiceOfProcess"
+    entitySetName: "openlatticedemoorg_app_services_of_process"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
         column: "StayAwayOrderID"
-      ol.notes:
-        type: "ol.notes"
-        column: "StayAwayRadiusStr"
     name: "serviceofprocess"
 
   probation:
     fqn: "ol.supervision"
-    entitySetName: "GuidesDemoProbation"
+    entitySetName: "openlatticedemoorg_app_probation"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -127,7 +130,7 @@ entityDefinitions:
 
   mugshot:
     fqn: "ol.image"
-    entitySetName: "GuidesDemoMugshots"
+    entitySetName: "openlatticedemoorg_app_image"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -139,7 +142,7 @@ entityDefinitions:
 
   policebeat:
     fqn: "ol.zone"
-    entitySetName: "GuidesDemoBeats"
+    entitySetName: "openlatticedemoorg_app_police_beats"
     propertyDefinitions:
       general.id:
         type: "general.id"
@@ -151,7 +154,7 @@ entityDefinitions:
 
   radius:
     fqn: "ol.distanceinterval"
-    entitySetName: "GuidesDemoRadius"
+    entitySetName: "openlatticedemoorg_app_radius"
     propertyDefinitions:
       ol.id:
         type: "ol.id"
@@ -177,9 +180,10 @@ entityDefinitions:
     name: "councildistrict"
 
 associationDefinitions:
+
   appearsin:
     fqn: "ol.appearsin"
-    entitySetName: "GuidesDemoAppearsIn"
+    entitySetName: "OpenLattice Demo Org -_app_appearsin"
     src: "person"
     dst: "case"
     propertyDefinitions:
@@ -190,7 +194,7 @@ associationDefinitions:
 
   ispictureof:
     fqn: "ol.ispictureof"
-    entitySetName: "GuidesDemoIsPictureOf"
+    entitySetName: "openlatticedemoorg_app_ispictureof"
     src: "mugshot"
     dst: "person"
     propertyDefinitions:
@@ -201,7 +205,7 @@ associationDefinitions:
 
   filedfor:
     fqn: "ol.filedfor"
-    entitySetName: "GuidesDemoFiledFor"
+    entitySetName: "openlatticedemoorg_app_filed_for"
     src: "serviceofprocess"
     dst: "stayawaylocation"
     propertyDefinitions:     
@@ -212,7 +216,7 @@ associationDefinitions:
 
   filedfor2:
     fqn: "ol.filedfor"
-    entitySetName: "GuidesDemoFiledFor"
+    entitySetName: "openlatticedemoorg_app_filed_for"
     src: "serviceofprocess"
     dst: "case"
     propertyDefinitions:
@@ -223,7 +227,7 @@ associationDefinitions:
 
   locatedat:
     fqn: "ol.locatedat"
-    entitySetName: "GuidesDemoLocatedAt"
+    entitySetName: "openlatticedemoorg_app_locatedat_1"
     src: "stayawaylocation"
     dst: "policebeat"
     propertyDefinitions:
@@ -234,7 +238,7 @@ associationDefinitions:
 
   locatedat2:
     fqn: "ol.locatedat"
-    entitySetName: "GuidesDemoLocatedAt"
+    entitySetName: "openlatticedemoorg_app_locatedat_1"
     src: "case"
     dst: "councildistrict"
     propertyDefinitions:
@@ -245,7 +249,7 @@ associationDefinitions:
 
   subjectof:
     fqn: "ol.subjectof"
-    entitySetName: "GuidesDemoSubjectOf"
+    entitySetName: "openlatticedemoorg_app_subjectof_1"
     src: "person"
     dst: "probation"
     propertyDefinitions:
@@ -256,7 +260,7 @@ associationDefinitions:
 
   reported:
     fqn: "ol.reported"
-    entitySetName: "GuidesDemoReported"
+    entitySetName: "OpenLattice Demo Org_app_reported"
     src: "person"
     dst: "driverslicense"
     propertyDefinitions:
@@ -265,20 +269,20 @@ associationDefinitions:
         column: "assn_reported"
     name: "reported"
 
-	servedwith:
-	 fqn: "ol.servedwith"
-	 entitySetName: "GuidesDemoServedWith"
-	 src: "person"
-	 dst: "serviceofprocess"
-	 propertyDefinitions:
-	   ol.id:
-	     type: "ol.id"
-	     column: "assn_servedwith"
-	 name: "servedwith"
+  servedwith:
+    fqn: "ol.servedwith"
+    entitySetName: "openlatticedemoorg_app_served_with"
+    src: "person"
+    dst: "serviceofprocess"
+    propertyDefinitions:
+      ol.id:
+        type: "ol.id"
+        column: "assn_servedwith"
+    name: "servedwith"
 
   registeredfor:
     fqn: "general.registeredfor"
-    entitySetName: "GuidesDemoRegisteredFor"
+    entitySetName: "openlatticedemoorg_app_registeredfor_1"
     src: "radius"
     dst: "serviceofprocess"
     propertyDefinitions:

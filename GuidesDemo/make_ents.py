@@ -2,13 +2,19 @@ import ruamel.yaml as yaml
 import openlattice
 from olpy.flight import Flight
 
+host = input('Local(l) or Prod(p)?')
 jwt = input('Input your JWT:')
+
+if host == 'p':
+    baseurl = "https://api.openlattice.com"
+elif host == 'l':
+    baseurl= "http://localhost:8080"
 
 fl = Flight()
 fl.deserialize("guides_demo.yaml")
 
 configuration = openlattice.Configuration()
-configuration.host = "https://api.openlattice.com"
+configuration.host = baseurl
 configuration.api_key_prefix['Authorization'] = 'Bearer'
 configuration.api_key['Authorization'] = jwt
 
