@@ -1,4 +1,6 @@
 
+# csv: demo_arrests.csv
+
 entityDefinitions:
   
   person:
@@ -28,7 +30,7 @@ entityDefinitions:
         column: "BirthDate"
         transforms:
         - !<transforms.DateTransform>
-          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy"]
+          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy", "yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm:ss.S","yyyy-MM-dd HH:mm:ss.SS","yyyy-MM-dd HH:mm:ss.SSS","yyyy-MM-dd HH:mm:ss.SSSS", "yyyy-MM-dd HH:mm:ss.SSSSS", "yyyy-MM-dd HH:mm:ss.SSSSSS"]
           timezone: "America/Los_Angeles"
       nc.SSN:
         type: "nc.SSN"
@@ -50,7 +52,7 @@ entityDefinitions:
         column: "IncidentDate"
         transforms:
         - !<transforms.DateAsDateTimeTransform>
-          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy"]
+          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy", "yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm:ss.S","yyyy-MM-dd HH:mm:ss.SS","yyyy-MM-dd HH:mm:ss.SSS","yyyy-MM-dd HH:mm:ss.SSSS", "yyyy-MM-dd HH:mm:ss.SSSSS", "yyyy-MM-dd HH:mm:ss.SSSSSS"]
           timezone: "America/Los_Angeles"
       publicsafety.drugspresent:
         type: "publicsafety.drugspresent"
@@ -176,7 +178,7 @@ entityDefinitions:
         column: "ArrestDate"
         transforms:
         - !<transforms.DateAsDateTimeTransform>
-          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy"]
+          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy", "yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm:ss.S","yyyy-MM-dd HH:mm:ss.SS","yyyy-MM-dd HH:mm:ss.SSS","yyyy-MM-dd HH:mm:ss.SSSS", "yyyy-MM-dd HH:mm:ss.SSSSS", "yyyy-MM-dd HH:mm:ss.SSSSSS"]
           timezone: "America/Los_Angeles"
       ol.type:
         type: "ol.type"
@@ -209,8 +211,8 @@ entityDefinitions:
       ol.id:
         type: "ol.id"
         column: "SubjectIdentification"
-      ol.sexoffender:
-        type: "ol.sexoffender"
+      ol.sexoffenderflag:
+        type: "ol.sexoffenderflag"
         column: "RegisteredSexOffender"
         transforms:
         - !<transforms.ParseBoolTransform> {}
@@ -490,7 +492,7 @@ associationDefinitions:
         column: "ArrestDate"
         transforms:
         - !<transforms.DateAsDateTimeTransform>
-          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy"]
+          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy", "yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm:ss.S","yyyy-MM-dd HH:mm:ss.SS","yyyy-MM-dd HH:mm:ss.SSS","yyyy-MM-dd HH:mm:ss.SSSS", "yyyy-MM-dd HH:mm:ss.SSSSS", "yyyy-MM-dd HH:mm:ss.SSSSSS"]
           timezone: "America/Los_Angeles"
     name: "sentencedwith"
 
@@ -516,7 +518,7 @@ associationDefinitions:
         column: "IncidentDate"
         transforms:
         - !<transforms.DateAsDateTimeTransform>
-          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy"]
+          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy", "yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm:ss.S","yyyy-MM-dd HH:mm:ss.SS","yyyy-MM-dd HH:mm:ss.SSS","yyyy-MM-dd HH:mm:ss.SSSS", "yyyy-MM-dd HH:mm:ss.SSSSS", "yyyy-MM-dd HH:mm:ss.SSSSSS"]
           timezone: "America/Los_Angeles"
     name: "involvedin1"
 
@@ -608,7 +610,7 @@ associationDefinitions:
         column: "ArrestDate"
         transforms:
         - !<transforms.DateAsDateTimeTransform>
-          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy"]
+          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy", "yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm:ss.S","yyyy-MM-dd HH:mm:ss.SS","yyyy-MM-dd HH:mm:ss.SSS","yyyy-MM-dd HH:mm:ss.SSSS", "yyyy-MM-dd HH:mm:ss.SSSSS", "yyyy-MM-dd HH:mm:ss.SSSSSS"]
           timezone: "America/Los_Angeles"
     name: "chargedwith1"
 
@@ -628,7 +630,7 @@ associationDefinitions:
         column: "ArrestDate"
         transforms:
         - !<transforms.DateAsDateTimeTransform>
-          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy"]
+          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy", "yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm:ss.S","yyyy-MM-dd HH:mm:ss.SS","yyyy-MM-dd HH:mm:ss.SSS","yyyy-MM-dd HH:mm:ss.SSSS", "yyyy-MM-dd HH:mm:ss.SSSSS", "yyyy-MM-dd HH:mm:ss.SSSSSS"]
           timezone: "America/Los_Angeles"
     name: "chargedwith2"
 
@@ -718,7 +720,7 @@ associationDefinitions:
         column: "ArrestDate"
         transforms:
         - !<transforms.DateAsDateTimeTransform>
-          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy"]
+          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy", "yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm:ss.S","yyyy-MM-dd HH:mm:ss.SS","yyyy-MM-dd HH:mm:ss.SSS","yyyy-MM-dd HH:mm:ss.SSSS", "yyyy-MM-dd HH:mm:ss.SSSSS", "yyyy-MM-dd HH:mm:ss.SSSSSS"]
           timezone: "America/Los_Angeles"
     name: "suspectedof"
 
@@ -753,7 +755,7 @@ associationDefinitions:
         column: "ArrestDate"
         transforms:
         - !<transforms.DateAsDateTimeTransform>
-          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy"]
+          pattern: ["MM/dd/yy", "M/dd/yy", "MM/d/yy", "M/d/yy", "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy", "yyyy-MM-dd HH:mm:ss","yyyy-MM-dd HH:mm:ss.S","yyyy-MM-dd HH:mm:ss.SS","yyyy-MM-dd HH:mm:ss.SSS","yyyy-MM-dd HH:mm:ss.SSSS", "yyyy-MM-dd HH:mm:ss.SSSSS", "yyyy-MM-dd HH:mm:ss.SSSSSS"]
           timezone: "America/Los_Angeles"
     name: "subjectof1"
 
